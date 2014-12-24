@@ -2,6 +2,7 @@
 
 #include <FLAC\stream_encoder.h>
 
+#include "DecoderStreamState.h"
 #include "EncoderStreamState.h"
 
 namespace FLAC
@@ -111,6 +112,7 @@ namespace FLAC
 		}
 
 		EncoderStreamState^ GetState();
+		DecoderStreamState^ GetVerifyStreamState();
 
 		void SetApodization(System::String^ specification);
 
