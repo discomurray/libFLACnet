@@ -21,6 +21,7 @@ namespace FLAC
 		property bool StreamableSubset { bool get(); void set(bool value); }
 		property bool Verify { bool get(); void set(bool value); }
 
+		void SetApodization(const char* specification);
 		void SetOggSerialNumber(long serialNumber);
 	};
 }

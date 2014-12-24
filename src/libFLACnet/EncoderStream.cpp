@@ -131,6 +131,15 @@ void EncoderStream::Verify::set(bool value)
 	}
 }
 
+void EncoderStream::SetApodization(const char* specification)
+{
+	FLAC__ASSERT(this->IsValid);
+	if (FLAC__stream_encoder_set_apodization(this->encoder, specification) == 0)
+	{
+		throw gcnew EncoderStreamException();
+	}
+}
+
 void EncoderStream::SetOggSerialNumber(long serialNumber)
 {
 	FLAC__ASSERT(this->IsValid);
