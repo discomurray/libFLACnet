@@ -70,6 +70,22 @@ bool EncoderStream::IsValid::get()
 	return this->encoder != nullptr;
 }
 
+bool EncoderStream::MidSideStereo::get()
+{
+	FLAC__ASSERT(this->IsValid);
+	return FLAC__stream_encoder_get_do_mid_side_stereo(this->encoder) != 0;
+}
+
+void EncoderStream::MidSideStereo::set(bool value)
+{
+	FLAC__ASSERT(is_valid());
+	if (FLAC__stream_encoder_set_do_mid_side_stereo(this->encoder, value) == 0)
+	{
+		throw gcnew EncoderStreamException();
+	}
+}
+
+
 unsigned int EncoderStream::SampleRate::get()
 {
 	FLAC__ASSERT(this->IsValid);
