@@ -75,6 +75,21 @@ bool EncoderStream::IsValid::get()
 	return this->encoder != nullptr;
 }
 
+unsigned int EncoderStream::MaxLpcOrder::get()
+{
+	FLAC__ASSERT(this->IsValid);
+	return FLAC__stream_encoder_get_max_lpc_order(this->encoder);
+}
+
+void EncoderStream::MaxLpcOrder::set(unsigned int value)
+{
+	FLAC__ASSERT(this->IsValid);
+	if (FLAC__stream_encoder_set_max_lpc_order(this->encoder, value) == 0)
+	{
+		throw gcnew EncoderStreamException();
+	}
+}
+
 bool EncoderStream::MidSideStereo::get()
 {
 	FLAC__ASSERT(this->IsValid);
@@ -89,7 +104,6 @@ void EncoderStream::MidSideStereo::set(bool value)
 		throw gcnew EncoderStreamException();
 	}
 }
-
 
 unsigned int EncoderStream::SampleRate::get()
 {
