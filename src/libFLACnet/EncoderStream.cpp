@@ -59,7 +59,7 @@ void EncoderStream::StreamableSubset::set(bool value)
 bool EncoderStream::Verify::get()
 {
 	FLAC__ASSERT(this->IsValid);
-	return FLAC__stream_encoder_get_verify(this->encoder);
+	return FLAC__stream_encoder_get_verify(this->encoder) != 0;
 }
 
 void EncoderStream::Verify::set(bool value)
