@@ -136,6 +136,21 @@ void EncoderStream::MidSideStereo::set(bool value)
 	}
 }
 
+unsigned int EncoderStream::MinimumResidualPartitionOrder::get()
+{
+	FLAC__ASSERT(this->IsValid);
+	return FLAC__stream_encoder_get_min_residual_partition_order(this->encoder);
+}
+
+void EncoderStream::MinimumResidualPartitionOrder::set(unsigned int value)
+{
+	FLAC__ASSERT(this->IsValid);
+	if (FLAC__stream_encoder_set_min_residual_partition_order(this->encoder, value) == 0)
+	{
+		throw gcnew EncoderStreamException();
+	}
+}
+
 unsigned int EncoderStream::QlpCoeffPrecision::get()
 {
 	FLAC__ASSERT(this->IsValid);
