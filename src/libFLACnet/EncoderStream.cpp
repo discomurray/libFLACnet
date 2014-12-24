@@ -1,11 +1,16 @@
 #include "stdafx.h"
 #include "EncoderStream.h"
 
+#include <msclr\marshal.h>
 #include <FLAC\assert.h>
 
 #include "EncoderStreamException.h"
 
+using namespace System;
+
 using namespace FLAC;
+
+using namespace msclr::interop;
 
 EncoderStream::EncoderStream()
 	: encoder(FLAC__stream_encoder_new())
@@ -131,10 +136,14 @@ void EncoderStream::Verify::set(bool value)
 	}
 }
 
-void EncoderStream::SetApodization(const char* specification)
+void EncoderStream::SetApodization(String^ specification)
 {
 	FLAC__ASSERT(this->IsValid);
-	if (FLAC__stream_encoder_set_apodization(this->encoder, specification) == 0)
+
+	marshal_context context;
+	const char* nativeSpecification = context.marshal_as<const char*>(specification);
+
+	if (FLAC__stream_encoder_set_apodization(this->encoder, nativeSpecification) == 0)
 	{
 		throw gcnew EncoderStreamException();
 	}
