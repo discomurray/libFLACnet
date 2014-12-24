@@ -256,6 +256,12 @@ void EncoderStream::Verify::set(bool value)
 	}
 }
 
+EncoderStreamState^ EncoderStream::GetState()
+{
+	FLAC__ASSERT(is_valid());
+	return gcnew EncoderStreamState(FLAC__stream_encoder_get_state(this->encoder));
+}
+
 void EncoderStream::SetApodization(String^ specification)
 {
 	FLAC__ASSERT(this->IsValid);

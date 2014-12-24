@@ -141,6 +141,7 @@
     <ClInclude Include="DecoderStreamException.h" />
     <ClInclude Include="EncoderStream.h" />
     <ClInclude Include="EncoderStreamException.h" />
+    <ClInclude Include="EncoderStreamState.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Stdafx.h" />
   </ItemGroup>
@@ -150,6 +151,7 @@
     <ClCompile Include="DecoderStreamException.cpp" />
     <ClCompile Include="EncoderStream.cpp" />
     <ClCompile Include="EncoderStreamException.cpp" />
+    <ClCompile Include="EncoderStreamState.cpp" />
     <ClCompile Include="Stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
