@@ -21,6 +21,21 @@ EncoderStream::~EncoderStream()
 	}
 }
 
+unsigned int EncoderStream::Channels::get()
+{
+	FLAC__ASSERT(this->IsValid);
+	return FLAC__stream_encoder_get_channels(this->encoder);
+}
+
+void EncoderStream::Channels::set(unsigned int value)
+{
+	FLAC__ASSERT(this->IsValid);
+	if (FLAC__stream_encoder_set_channels(this->encoder, value) == 0)
+	{
+		throw gcnew EncoderStreamException();
+	}
+}
+
 bool EncoderStream::IsValid::get()
 {
 	return this->encoder != nullptr;
