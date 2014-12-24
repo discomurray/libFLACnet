@@ -15,6 +15,7 @@ namespace FLAC
 		property unsigned int BitsPerSample { unsigned int get(); void set(unsigned int value); }
 		property unsigned int BlockSize { unsigned int get(); void set(unsigned int value); }
 		property unsigned int Channels { unsigned int get(); void set(unsigned int value); }
+		property bool EscapeCoding { bool get(); void set(bool value); }
 		property bool IsValid { bool get(); }
 		property unsigned int MaxLpcOrder { unsigned int get(); void set(unsigned int value); }
 		property bool MidSideStereo { bool get(); void set(bool value); }

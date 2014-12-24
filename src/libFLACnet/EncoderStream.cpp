@@ -55,6 +55,7 @@ void EncoderStream::BlockSize::set(unsigned int value)
 		throw gcnew EncoderStreamException();
 	}
 }
+
 unsigned int EncoderStream::Channels::get()
 {
 	FLAC__ASSERT(this->IsValid);
@@ -65,6 +66,21 @@ void EncoderStream::Channels::set(unsigned int value)
 {
 	FLAC__ASSERT(this->IsValid);
 	if (FLAC__stream_encoder_set_channels(this->encoder, value) == 0)
+	{
+		throw gcnew EncoderStreamException();
+	}
+}
+
+bool EncoderStream::EscapeCoding::get()
+{
+	FLAC__ASSERT(this->IsValid);
+	return FLAC__stream_encoder_get_do_escape_coding(this->encoder) != 0;
+}
+
+void EncoderStream::EscapeCoding::set(bool value)
+{
+	FLAC__ASSERT(this->IsValid);
+	if (FLAC__stream_encoder_set_do_escape_coding(this->encoder, value) == 0)
 	{
 		throw gcnew EncoderStreamException();
 	}
