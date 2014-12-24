@@ -105,6 +105,21 @@ void EncoderStream::MidSideStereo::set(bool value)
 	}
 }
 
+unsigned int EncoderStream::QlpCoeffPrecision::get()
+{
+	FLAC__ASSERT(this->IsValid);
+	return FLAC__stream_encoder_get_qlp_coeff_precision(this->encoder);
+}
+
+void EncoderStream::QlpCoeffPrecision::set(unsigned int value)
+{
+	FLAC__ASSERT(this->IsValid);
+	if (FLAC__stream_encoder_set_qlp_coeff_precision(this->encoder, value) == 0)
+	{
+		throw gcnew EncoderStreamException();
+	}
+}
+
 unsigned int EncoderStream::SampleRate::get()
 {
 	FLAC__ASSERT(this->IsValid);

@@ -16,8 +16,9 @@ namespace FLAC
 		property unsigned int BlockSize { unsigned int get(); void set(unsigned int value); }
 		property unsigned int Channels { unsigned int get(); void set(unsigned int value); }
 		property bool IsValid { bool get(); }
-		property unsigned int MaxLpcOrder { unsigned int get(); void set(unsigned  int value); }
+		property unsigned int MaxLpcOrder { unsigned int get(); void set(unsigned int value); }
 		property bool MidSideStereo { bool get(); void set(bool value); }
+		property unsigned int QlpCoeffPrecision { unsigned int get(); void set(unsigned int value); }
 		property unsigned int SampleRate { unsigned int get(); void set(unsigned int); }
 		property bool StreamableSubset { bool get(); void set(bool value); }
 		property bool Verify { bool get(); void set(bool value); }
