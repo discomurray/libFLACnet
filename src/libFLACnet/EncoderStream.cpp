@@ -136,16 +136,31 @@ void EncoderStream::MidSideStereo::set(bool value)
 	}
 }
 
-unsigned int EncoderStream::MinimumResidualPartitionOrder::get()
+unsigned int EncoderStream::ResidualPartitionOrderMinimum::get()
 {
 	FLAC__ASSERT(this->IsValid);
 	return FLAC__stream_encoder_get_min_residual_partition_order(this->encoder);
 }
 
-void EncoderStream::MinimumResidualPartitionOrder::set(unsigned int value)
+void EncoderStream::ResidualPartitionOrderMinimum::set(unsigned int value)
 {
 	FLAC__ASSERT(this->IsValid);
 	if (FLAC__stream_encoder_set_min_residual_partition_order(this->encoder, value) == 0)
+	{
+		throw gcnew EncoderStreamException();
+	}
+}
+
+unsigned int EncoderStream::ResidualPartitionOrderMaximum::get()
+{
+	FLAC__ASSERT(this->IsValid);
+	return FLAC__stream_encoder_get_max_residual_partition_order(this->encoder);
+}
+
+void EncoderStream::ResidualPartitionOrderMaximum::set(unsigned int value)
+{
+	FLAC__ASSERT(this->IsValid);
+	if (FLAC__stream_encoder_set_max_residual_partition_order(this->encoder, value) == 0)
 	{
 		throw gcnew EncoderStreamException();
 	}

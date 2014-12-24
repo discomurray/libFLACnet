@@ -29,15 +29,21 @@ namespace FLAC
 
 		property bool MidSideStereo { bool get(); void set(bool value); }
 
-		property unsigned int MinimumResidualPartitionOrder
+		property unsigned int QlpCoeffPrecision { unsigned int get(); void set(unsigned int value); }
+
+		property bool QlpCoeffPrecisionSearch { bool get(); void set(bool value); }
+
+		property unsigned int ResidualPartitionOrderMinimum
 		{
 			unsigned int get();
 			void set(unsigned int value);
 		}
 
-		property unsigned int QlpCoeffPrecision { unsigned int get(); void set(unsigned int value); }
-
-		property bool QlpCoeffPrecisionSearch { bool get(); void set(bool value); }
+		property unsigned int ResidualPartitionOrderMaximum
+		{
+			unsigned int get();
+			void set(unsigned int value);
+		}
 
 		property unsigned int SampleRate { unsigned int get(); void set(unsigned int); }
 
