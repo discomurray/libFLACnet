@@ -86,6 +86,21 @@ void EncoderStream::EscapeCoding::set(bool value)
 	}
 }
 
+bool EncoderStream::ExhaustiveModelSearch::get()
+{
+	FLAC__ASSERT(this->IsValid);
+	return FLAC__stream_encoder_get_do_exhaustive_model_search(this->encoder) != 0;
+}
+
+void EncoderStream::ExhaustiveModelSearch::set(bool value)
+{
+	FLAC__ASSERT(this->IsValid);
+	if (FLAC__stream_encoder_set_do_exhaustive_model_search(this->encoder, value) == 0)
+	{
+		throw gcnew EncoderStreamException();
+	}
+}
+
 bool EncoderStream::IsValid::get()
 {
 	return this->encoder != nullptr;
