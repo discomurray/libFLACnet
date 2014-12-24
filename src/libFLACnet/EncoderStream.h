@@ -13,6 +13,7 @@ namespace FLAC
 		~EncoderStream();
 
 		property bool IsValid { bool get(); }
+		property bool Verify { bool get(); void set(bool value); }
 
 		void SetOggSerialNumber(long serialNumber);
 	};

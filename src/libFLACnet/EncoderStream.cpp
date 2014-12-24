@@ -26,6 +26,21 @@ bool EncoderStream::IsValid::get()
 	return this->encoder != nullptr;
 }
 
+bool EncoderStream::Verify::get()
+{
+	FLAC__ASSERT(this->IsValid);
+	return FLAC__stream_encoder_get_verify(this->encoder);
+}
+
+void EncoderStream::Verify::set(bool value)
+{
+	FLAC__ASSERT(this->IsValid);
+	if (FLAC__stream_encoder_set_verify(this->encoder, value) == 0)
+	{
+		throw gcnew EncoderStreamException();
+	}
+}
+
 void EncoderStream::SetOggSerialNumber(long serialNumber)
 {
 	FLAC__ASSERT(this->IsValid);
