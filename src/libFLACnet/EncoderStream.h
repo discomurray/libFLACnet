@@ -96,6 +96,12 @@ namespace FLAC
 			void set(bool value);
 		}
 
+		property unsigned long long TotalSamplesEstimate
+		{
+			unsigned long long get();
+			void set(unsigned long long value);
+		}
+
 		property bool Verify
 		{
 			bool get();

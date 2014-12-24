@@ -226,6 +226,21 @@ void EncoderStream::StreamableSubset::set(bool value)
 	}
 }
 
+unsigned long long EncoderStream::TotalSamplesEstimate::get()
+{
+	FLAC__ASSERT(this->IsValid);
+	return FLAC__stream_encoder_get_total_samples_estimate(this->encoder) != 0;
+}
+
+void EncoderStream::TotalSamplesEstimate::set(unsigned long long value)
+{
+	FLAC__ASSERT(is_valid());
+	if (FLAC__stream_encoder_set_total_samples_estimate(this->encoder, value) == 0)
+	{
+		throw gcnew EncoderStreamException();
+	}
+}
+
 bool EncoderStream::Verify::get()
 {
 	FLAC__ASSERT(this->IsValid);
