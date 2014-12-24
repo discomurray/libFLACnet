@@ -29,7 +29,7 @@ bool DecoderStream::IsValid::get()
 void DecoderStream::SetOggSerialNumber(long serialNumber)
 {
 	FLAC__ASSERT(this->IsValid);
-	if (FLAC__stream_decoder_set_ogg_serial_number(this->decoder, serialNumber) != 0)
+	if (FLAC__stream_decoder_set_ogg_serial_number(this->decoder, serialNumber) == 0)
 	{
 		throw gcnew DecoderStreamException();
 	}

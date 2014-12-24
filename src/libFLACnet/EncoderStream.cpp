@@ -44,7 +44,7 @@ void EncoderStream::Verify::set(bool value)
 void EncoderStream::SetOggSerialNumber(long serialNumber)
 {
 	FLAC__ASSERT(this->IsValid);
-	if (FLAC__stream_encoder_set_ogg_serial_number(this->encoder, serialNumber) != 0)
+	if (FLAC__stream_encoder_set_ogg_serial_number(this->encoder, serialNumber) == 0)
 	{
 		throw gcnew EncoderStreamException();
 	}
