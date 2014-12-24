@@ -27,6 +27,12 @@
     <ClInclude Include="DecoderStream.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="DecoderStreamException.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EncoderStreamException.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AssemblyInfo.cpp">
@@ -39,6 +45,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="DecoderStream.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DecoderStreamException.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EncoderStreamException.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
