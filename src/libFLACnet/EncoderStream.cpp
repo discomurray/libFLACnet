@@ -56,6 +56,21 @@ bool EncoderStream::IsValid::get()
 	return this->encoder != nullptr;
 }
 
+unsigned int EncoderStream::SampleRate::get()
+{
+	FLAC__ASSERT(this->IsValid);
+	return FLAC__stream_encoder_get_sample_rate(this->encoder);
+}
+
+void EncoderStream::SampleRate::set(unsigned int value)
+{
+	FLAC__ASSERT(this->IsValid);
+	if (FLAC__stream_encoder_set_sample_rate(this->encoder, value) == 0)
+	{
+		throw gcnew EncoderStreamException();
+	}
+}
+
 bool EncoderStream::StreamableSubset::get()
 {
 	FLAC__ASSERT(this->IsValid);
