@@ -26,6 +26,21 @@ bool EncoderStream::IsValid::get()
 	return this->encoder != nullptr;
 }
 
+bool EncoderStream::StreamableSubset::get()
+{
+	FLAC__ASSERT(this->IsValid);
+	return FLAC__stream_encoder_get_streamable_subset(this->encoder) != 0;
+}
+
+void EncoderStream::StreamableSubset::set(bool value)
+{
+	FLAC__ASSERT(is_valid());
+	if (FLAC__stream_encoder_set_streamable_subset(this->encoder, value) == 0)
+	{
+		throw gcnew EncoderStreamException();
+	}
+}
+
 bool EncoderStream::Verify::get()
 {
 	FLAC__ASSERT(this->IsValid);
