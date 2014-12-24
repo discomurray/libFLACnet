@@ -16,3 +16,8 @@ DecoderStream::~DecoderStream()
 		FLAC__stream_decoder_delete(this->decoder);
 	}
 }
+
+bool DecoderStream::IsValid::get()
+{
+	return this->decoder != nullptr;
+}

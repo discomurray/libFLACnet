@@ -11,5 +11,7 @@ namespace FLAC
 	public:
 		DecoderStream();
 		~DecoderStream();
+
+		property bool IsValid { bool get(); }
 	};
 }

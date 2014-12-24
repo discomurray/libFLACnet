@@ -16,3 +16,8 @@ EncoderStream::~EncoderStream()
 		FLAC__stream_encoder_delete(this->encoder);
 	}
 }
+
+bool EncoderStream::IsValid::get()
+{
+	return this->encoder != nullptr;
+}
