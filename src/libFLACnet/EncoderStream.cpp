@@ -36,6 +36,20 @@ void EncoderStream::BitsPerSample::set(unsigned int value)
 	}
 }
 
+unsigned int EncoderStream::BlockSize::get()
+{
+	FLAC__ASSERT(this->IsValid);
+	return FLAC__stream_encoder_get_blocksize(this->encoder);
+}
+
+void EncoderStream::BlockSize::set(unsigned int value)
+{
+	FLAC__ASSERT(this->IsValid);
+	if (FLAC__stream_encoder_set_blocksize(this->encoder, value) == 0)
+	{
+		throw gcnew EncoderStreamException();
+	}
+}
 unsigned int EncoderStream::Channels::get()
 {
 	FLAC__ASSERT(this->IsValid);
