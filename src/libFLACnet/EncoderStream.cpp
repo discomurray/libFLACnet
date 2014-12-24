@@ -120,6 +120,21 @@ void EncoderStream::QlpCoeffPrecision::set(unsigned int value)
 	}
 }
 
+bool EncoderStream::QlpCoeffPrecisionSearch::get()
+{
+	FLAC__ASSERT(this->IsValid);
+	return FLAC__stream_encoder_get_do_qlp_coeff_prec_search(this->encoder) != 0;
+}
+
+void EncoderStream::QlpCoeffPrecisionSearch::set(bool value)
+{
+	FLAC__ASSERT(this->IsValid);
+	if (FLAC__stream_encoder_set_do_qlp_coeff_prec_search(this->encoder, value) == 0)
+	{
+		throw gcnew EncoderStreamException();
+	}
+}
+
 unsigned int EncoderStream::SampleRate::get()
 {
 	FLAC__ASSERT(this->IsValid);
