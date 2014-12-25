@@ -137,6 +137,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="DecoderErrorStats.h" />
     <ClInclude Include="DecoderStream.h" />
     <ClInclude Include="DecoderStreamException.h" />
     <ClInclude Include="DecoderStreamState.h" />
@@ -148,6 +149,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AssemblyInfo.cpp" />
+    <ClCompile Include="DecoderErrorStats.cpp" />
     <ClCompile Include="DecoderStream.cpp" />
     <ClCompile Include="DecoderStreamException.cpp" />
     <ClCompile Include="DecoderStreamState.cpp" />

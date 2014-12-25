@@ -256,6 +256,11 @@ void EncoderStream::Verify::set(bool value)
 	}
 }
 
+DecoderErrorStats^ EncoderStream::GetDecoderErrorStats()
+{
+	return DecoderErrorStats::FromEncoder(this->encoder);
+}
+
 EncoderStreamState^ EncoderStream::GetState()
 {
 	FLAC__ASSERT(is_valid());
