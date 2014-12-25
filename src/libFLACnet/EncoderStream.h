@@ -52,6 +52,12 @@ namespace FLAC
 			bool get();
 		}
 
+		property bool LooseMidSideStereo
+		{
+			bool get();
+			void set(bool value);
+		}
+
 		property unsigned int MaxLpcOrder
 		{
 			unsigned int get();

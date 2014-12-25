@@ -106,6 +106,22 @@ bool EncoderStream::IsValid::get()
 	return this->encoder != nullptr;
 }
 
+
+bool EncoderStream::LooseMidSideStereo::get()
+{
+	FLAC__ASSERT(this->IsValid);
+	return FLAC__stream_encoder_get_loose_mid_side_stereo(this->encoder) != 0;
+}
+
+void EncoderStream::LooseMidSideStereo::set(bool value)
+{
+	FLAC__ASSERT(this->IsValid);
+	if (FLAC__stream_encoder_set_loose_mid_side_stereo(this->encoder, value) == 0)
+	{
+		throw gcnew EncoderStreamException();
+	}
+}
+
 unsigned int EncoderStream::MaxLpcOrder::get()
 {
 	FLAC__ASSERT(this->IsValid);
