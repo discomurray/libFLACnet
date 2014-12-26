@@ -145,7 +145,7 @@ bool EncoderStream::MidSideStereo::get()
 
 void EncoderStream::MidSideStereo::set(bool value)
 {
-	FLAC__ASSERT(is_valid());
+	FLAC__ASSERT(this->IsValid);
 	if (FLAC__stream_encoder_set_do_mid_side_stereo(this->encoder, value) == 0)
 	{
 		throw gcnew EncoderStreamException();
@@ -235,7 +235,7 @@ bool EncoderStream::StreamableSubset::get()
 
 void EncoderStream::StreamableSubset::set(bool value)
 {
-	FLAC__ASSERT(is_valid());
+	FLAC__ASSERT(this->IsValid);
 	if (FLAC__stream_encoder_set_streamable_subset(this->encoder, value) == 0)
 	{
 		throw gcnew EncoderStreamException();
@@ -250,7 +250,7 @@ unsigned long long EncoderStream::TotalSamplesEstimate::get()
 
 void EncoderStream::TotalSamplesEstimate::set(unsigned long long value)
 {
-	FLAC__ASSERT(is_valid());
+	FLAC__ASSERT(this->IsValid);
 	if (FLAC__stream_encoder_set_total_samples_estimate(this->encoder, value) == 0)
 	{
 		throw gcnew EncoderStreamException();
@@ -279,13 +279,13 @@ DecoderErrorStats^ EncoderStream::GetDecoderErrorStats()
 
 EncoderStreamState^ EncoderStream::GetState()
 {
-	FLAC__ASSERT(is_valid());
+	FLAC__ASSERT(this->IsValid);
 	return gcnew EncoderStreamState(FLAC__stream_encoder_get_state(this->encoder));
 }
 
 DecoderStreamState^ EncoderStream::GetVerifyStreamState()
 {
-	FLAC__ASSERT(is_valid());
+	FLAC__ASSERT(this->IsValid);
 	return gcnew DecoderStreamState(FLAC__stream_encoder_get_verify_decoder_state(this->encoder));
 }
 
