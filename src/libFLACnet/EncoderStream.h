@@ -134,6 +134,8 @@ namespace FLAC
 			void set(bool value);
 		}
 
+		void Finish();
+
 		DecoderErrorStats^ GetDecoderErrorStats();
 
 		EncoderStreamState^ GetState();

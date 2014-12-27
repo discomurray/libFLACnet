@@ -278,6 +278,15 @@ void EncoderStream::Verify::set(bool value)
 	}
 }
 
+void EncoderStream::Finish()
+{
+	FLAC__ASSERT(this->IsValid);
+	if (FLAC__stream_encoder_finish(this->encoder) != 0)
+	{
+		throw gcnew EncoderStreamException();
+	}
+}
+
 DecoderErrorStats^ EncoderStream::GetDecoderErrorStats()
 {
 	return DecoderErrorStats::FromEncoder(this->encoder);
