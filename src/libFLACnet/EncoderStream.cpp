@@ -335,6 +335,41 @@ void EncoderStream::MetadataCallback(const FLAC__StreamEncoder* encoder, const F
 {
 }
 
+void EncoderStream::Process(array<array<int>^>^ samples, unsigned int sampleCount)
+{
+	FLAC__ASSERT(this->IsValid);
+
+	int channelCount = samples->Length;
+
+	FLAC__int32** channels = new FLAC__int32*[channelCount];
+	for (int c = 0; c < channelCount; c++)
+	{
+		channels[c] = new FLAC__int32[sampleCount];
+
+		for (unsigned int s = 0; s < sampleCount; s++)
+		{
+			channels[c][s] = samples[c][s];
+		}
+	}
+
+	try
+	{
+		if (FLAC__stream_encoder_process(this->encoder, channels, sampleCount) != 0)
+		{
+			throw gcnew EncoderStreamException();
+		}
+	}
+	finally
+	{
+		for (int c = 0; c < channelCount; c++)
+		{
+			delete[] channels[c];
+		}
+
+		delete[] channels;
+	}
+}
+
 FLAC__StreamEncoderSeekStatus EncoderStream::SeekCallback(const FLAC__StreamEncoder* encoder, FLAC__uint64 absolute_byte_offset, void* client_data)
 {
 	return FLAC__StreamEncoderSeekStatus::FLAC__STREAM_ENCODER_SEEK_STATUS_OK;

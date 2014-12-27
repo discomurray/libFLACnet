@@ -144,6 +144,8 @@ namespace FLAC
 
 		void Initialize();
 
+		void Process(array<array<int>^>^ samples, unsigned int sampleCount);
+
 		void SetApodization(System::String^ specification);
 
 		void SetOggSerialNumber(long serialNumber);
