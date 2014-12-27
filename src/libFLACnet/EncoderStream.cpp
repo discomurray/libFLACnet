@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "EncoderStream.h"
 
+#include <vector>
+
 #include <msclr\marshal.h>
 #include <FLAC\assert.h>
 
@@ -367,6 +369,22 @@ void EncoderStream::Process(array<array<int>^>^ samples, unsigned int sampleCoun
 		}
 
 		delete[] channels;
+	}
+}
+
+void EncoderStream::ProcessInterleaved(array<int>^ samples, unsigned int sampleCount)
+{
+	FLAC__ASSERT(this->IsValid);
+
+	std::vector<FLAC__int32> buffer(samples->Length);
+	for (int i = 0; i < samples->Length; i++)
+	{
+		buffer[i] = samples[i];
+	}
+
+	if (FLAC__stream_encoder_process_interleaved(this->encoder, buffer.data(), sampleCount) != 0)
+	{
+		throw gcnew EncoderStreamException();
 	}
 }
 
