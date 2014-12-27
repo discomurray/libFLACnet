@@ -18,5 +18,12 @@
 
             Assert.IsTrue(stream.IsValid);
         }
+
+        [TestMethod]
+        public void Initialize()
+        {
+            EncoderStream stream = new EncoderStream();
+            stream.Initialize();
+        }
     }
 }
