@@ -8,9 +8,25 @@
 
 namespace FLAC
 {
+	private delegate FLAC__StreamEncoderWriteStatus EncoderStreamWriteCallback(const FLAC__StreamEncoder* encoder, const FLAC__byte buffer[], size_t bytes, unsigned samples, unsigned current_frame, void* client_data);
+
+	private delegate FLAC__StreamEncoderSeekStatus EncoderStreamSeekCallback(const FLAC__StreamEncoder* encoder, FLAC__uint64 absolute_byte_offset, void* client_data);
+
+	private delegate FLAC__StreamEncoderTellStatus EncoderStreamTellCallback(const FLAC__StreamEncoder* encoder, FLAC__uint64* absolute_byte_offset, void* client_data);
+
+	private delegate void EncoderStreamMetadataCallback(const FLAC__StreamEncoder* encoder, const FLAC__StreamMetadata* metadata, void* client_data);
+
 	public ref class EncoderStream
 	{
 		FLAC__StreamEncoder* encoder;
+
+		System::Runtime::InteropServices::GCHandle metadataHandle;
+
+		System::Runtime::InteropServices::GCHandle seekHandle;
+
+		System::Runtime::InteropServices::GCHandle tellHandle;
+
+		System::Runtime::InteropServices::GCHandle writeHandle;
 
 	public:
 		EncoderStream();
@@ -124,8 +140,19 @@ namespace FLAC
 
 		DecoderStreamState^ GetVerifyStreamState();
 
+		void Initialize();
+
 		void SetApodization(System::String^ specification);
 
 		void SetOggSerialNumber(long serialNumber);
+
+	private:
+		void MetadataCallback(const FLAC__StreamEncoder* encoder, const FLAC__StreamMetadata* metadata, void* client_data);
+
+		FLAC__StreamEncoderSeekStatus SeekCallback(const FLAC__StreamEncoder* encoder, FLAC__uint64 absolute_byte_offset, void* client_data);
+
+		FLAC__StreamEncoderTellStatus TellCallback(const FLAC__StreamEncoder* encoder, FLAC__uint64* absolute_byte_offset, void* client_data);
+				
+		FLAC__StreamEncoderWriteStatus WriteCallback(const FLAC__StreamEncoder* encoder, const FLAC__byte buffer[], size_t bytes, unsigned samples, unsigned current_frame, void* client_data);
 	};
 }

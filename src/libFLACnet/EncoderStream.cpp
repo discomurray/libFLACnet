@@ -7,6 +7,7 @@
 #include "EncoderStreamException.h"
 
 using namespace System;
+using namespace System::Runtime::InteropServices;
 
 using namespace FLAC;
 
@@ -19,6 +20,11 @@ EncoderStream::EncoderStream()
 
 EncoderStream::~EncoderStream()
 {
+	this->metadataHandle.Free();
+	this->seekHandle.Free();
+	this->tellHandle.Free();
+	this->writeHandle.Free();
+
 	if (this->encoder != nullptr)
 	{
 		FLAC__stream_encoder_finish(this->encoder);
@@ -289,6 +295,42 @@ DecoderStreamState^ EncoderStream::GetVerifyStreamState()
 	return gcnew DecoderStreamState(FLAC__stream_encoder_get_verify_decoder_state(this->encoder));
 }
 
+void EncoderStream::Initialize()
+{
+	FLAC__ASSERT(this->IsValid);
+
+	auto writeDelegate = gcnew EncoderStreamWriteCallback(this, &EncoderStream::WriteCallback);
+	this->writeHandle = GCHandle::Alloc(writeDelegate);
+	IntPtr writeFp = Marshal::GetFunctionPointerForDelegate(writeDelegate);
+	auto writeCallback = static_cast<FLAC__StreamEncoderWriteCallback>(writeFp.ToPointer());
+
+	auto seekDelegate = gcnew EncoderStreamSeekCallback(this, &EncoderStream::SeekCallback);
+	this->seekHandle = GCHandle::Alloc(seekDelegate);
+	IntPtr seekFp = Marshal::GetFunctionPointerForDelegate(seekDelegate);
+	FLAC__StreamEncoderSeekCallback seekCallback = static_cast<FLAC__StreamEncoderSeekCallback>(seekFp.ToPointer());
+
+	auto tellDelegate = gcnew EncoderStreamTellCallback(this, &EncoderStream::TellCallback);
+	this->tellHandle = GCHandle::Alloc(tellDelegate);
+	IntPtr tellFp = Marshal::GetFunctionPointerForDelegate(tellDelegate);
+	FLAC__StreamEncoderTellCallback tellCallback = static_cast<FLAC__StreamEncoderTellCallback>(tellFp.ToPointer());
+
+	auto metadataDelegate = gcnew EncoderStreamMetadataCallback(this, &EncoderStream::MetadataCallback);
+	this->metadataHandle = GCHandle::Alloc(metadataDelegate);
+	IntPtr metadataFp = Marshal::GetFunctionPointerForDelegate(metadataDelegate);
+	FLAC__StreamEncoderMetadataCallback metadataCallback = static_cast<FLAC__StreamEncoderMetadataCallback>(metadataFp.ToPointer());
+
+	FLAC__StreamEncoderInitStatus status = FLAC__stream_encoder_init_stream(this->encoder, writeCallback, seekCallback, tellCallback, metadataCallback, nullptr);
+}
+
+void EncoderStream::MetadataCallback(const FLAC__StreamEncoder* encoder, const FLAC__StreamMetadata* metadata, void* client_data)
+{
+}
+
+FLAC__StreamEncoderSeekStatus EncoderStream::SeekCallback(const FLAC__StreamEncoder* encoder, FLAC__uint64 absolute_byte_offset, void* client_data)
+{
+	return FLAC__StreamEncoderSeekStatus::FLAC__STREAM_ENCODER_SEEK_STATUS_OK;
+}
+
 void EncoderStream::SetApodization(String^ specification)
 {
 	FLAC__ASSERT(this->IsValid);
@@ -309,4 +351,14 @@ void EncoderStream::SetOggSerialNumber(long serialNumber)
 	{
 		throw gcnew EncoderStreamException();
 	}
+}
+
+FLAC__StreamEncoderTellStatus EncoderStream::TellCallback(const FLAC__StreamEncoder* encoder, FLAC__uint64* absolute_byte_offset, void* client_data)
+{
+	return FLAC__StreamEncoderTellStatus::FLAC__STREAM_ENCODER_TELL_STATUS_OK;
+}
+
+FLAC__StreamEncoderWriteStatus EncoderStream::WriteCallback(const FLAC__StreamEncoder* encoder, const FLAC__byte buffer[], size_t bytes, unsigned samples, unsigned current_frame, void* client_data)
+{
+	return FLAC__StreamEncoderWriteStatus::FLAC__STREAM_ENCODER_WRITE_STATUS_OK;
 }
