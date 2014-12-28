@@ -43,6 +43,11 @@ namespace FLAC
 			void set(bool value);
 		}
 
+		property unsigned int SampleRate
+		{
+			unsigned int get();
+		}
+
 		property unsigned long long TotalSamples
 		{
 			unsigned long long get();

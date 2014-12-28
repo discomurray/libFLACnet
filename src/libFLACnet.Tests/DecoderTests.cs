@@ -113,5 +113,15 @@
 
             Assert.AreEqual(decoder.BitsPerSample, expectedBitsPerSample);
         }
+
+        [TestMethod]
+        public void SampleRate()
+        {
+            uint expectedSampleRate = 0;
+
+            Decoder decoder = new Decoder();
+
+            Assert.AreEqual(decoder.SampleRate, expectedSampleRate);
+        }
     }
 }

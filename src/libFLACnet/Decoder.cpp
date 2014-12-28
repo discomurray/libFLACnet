@@ -64,6 +64,13 @@ void Decoder::Md5Checking::set(bool value)
 	}
 }
 
+unsigned int Decoder::SampleRate::get()
+{
+	FLAC__ASSERT(this->IsValid);
+
+	return FLAC__stream_decoder_get_sample_rate(this->decoder);
+}
+
 unsigned long long Decoder::TotalSamples::get()
 {
 	FLAC__ASSERT(this->IsValid);
