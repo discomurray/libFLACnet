@@ -420,5 +420,82 @@
                 throw;
             }
         }
+
+        [TestMethod]
+        public void Initialize_AsOgg()
+        {
+            uint channels = 1;
+            uint bitsPerSample = 8;
+            uint sampleRate = 44100;
+            uint blockSize = 576;
+            uint maxLpcOrder = 0;
+            uint autoQlpCoeffPrecision = 0;
+            uint expectedQlpCoeffPrecision = 6;
+            uint residualPartitionOrderMaximum = 0;
+            uint residualPartitionOrderMinimum = 0;
+            uint totalSamplesEstimate = 0;
+
+            System.IO.MemoryStream stream = new System.IO.MemoryStream();
+            Encoder encoder = new Encoder(stream);
+
+            encoder.Verify = true;
+            encoder.StreamableSubset = true;
+            encoder.Channels = channels;
+            encoder.BitsPerSample = bitsPerSample;
+            encoder.SampleRate = sampleRate;
+            encoder.SetCompressionLevel(uint.MaxValue);
+            encoder.BlockSize = blockSize;
+            encoder.MidSideStereo = false;
+            encoder.LooseMidSideStereo = false;
+            encoder.MaxLpcOrder = maxLpcOrder;
+            encoder.QlpCoeffPrecision = autoQlpCoeffPrecision;
+            encoder.QlpCoeffPrecisionSearch = false;
+            encoder.EscapeCoding = false;
+            encoder.ExhaustiveModelSearch = false;
+            encoder.ResidualPartitionOrderMinimum = residualPartitionOrderMinimum;
+            encoder.ResidualPartitionOrderMaximum = residualPartitionOrderMaximum;
+            encoder.TotalSamplesEstimate = totalSamplesEstimate;
+            encoder.InitializeOgg();
+
+            Assert.IsNotNull(encoder.GetState());
+            Assert.IsNotNull(encoder.GetVerifyStreamState());
+            Assert.IsNotNull(encoder.GetDecoderErrorStats());
+
+            Assert.IsTrue(encoder.Verify);
+            Assert.IsTrue(encoder.StreamableSubset);
+            Assert.IsFalse(encoder.MidSideStereo);
+            Assert.IsFalse(encoder.LooseMidSideStereo);
+            Assert.AreEqual(encoder.Channels, channels);
+            Assert.AreEqual(encoder.BitsPerSample, bitsPerSample);
+            Assert.AreEqual(encoder.SampleRate, sampleRate);
+            Assert.AreEqual(encoder.BlockSize, blockSize);
+            Assert.AreEqual(encoder.MaxLpcOrder, maxLpcOrder);
+            Assert.AreEqual(encoder.QlpCoeffPrecision, expectedQlpCoeffPrecision);
+            Assert.IsFalse(encoder.QlpCoeffPrecisionSearch);
+            Assert.IsFalse(encoder.EscapeCoding);
+            Assert.IsFalse(encoder.ExhaustiveModelSearch);
+            Assert.AreEqual(encoder.ResidualPartitionOrderMinimum, residualPartitionOrderMinimum);
+            Assert.AreEqual(encoder.ResidualPartitionOrderMaximum, residualPartitionOrderMaximum);
+            Assert.AreEqual(encoder.TotalSamplesEstimate, totalSamplesEstimate);
+
+            int[] samples = new int[1024];
+            for (int i = 0; i < samples.Length; i++)
+            {
+                samples[i] = i & 7;
+            }
+
+            encoder.Process(new[] { samples }, (uint)samples.Length);
+            encoder.ProcessInterleaved(samples, (uint)samples.Length);
+
+            try
+            {
+                encoder.Finish();
+            }
+            catch (Exception e)
+            {
+                var state = encoder.GetState();
+                throw;
+            }
+        }
     }
 }
