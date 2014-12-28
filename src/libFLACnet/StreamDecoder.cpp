@@ -188,6 +188,68 @@ void StreamDecoder::Initialize()
 	}
 }
 
+void StreamDecoder::InitializeOgg()
+{
+	FLAC__ASSERT(this->IsValid);
+
+	auto readDelegate = gcnew StreamDecoderRead(this, &StreamDecoder::Read);
+	this->readHandle = GCHandle::Alloc(readDelegate);
+	IntPtr readFp = Marshal::GetFunctionPointerForDelegate(readDelegate);
+	auto readCallback = static_cast<FLAC__StreamDecoderReadCallback>(readFp.ToPointer());
+
+	auto seekDelegate = gcnew StreamDecoderSeek(this, &StreamDecoder::Seek);
+	this->seekHandle = GCHandle::Alloc(seekDelegate);
+	IntPtr seekFp = Marshal::GetFunctionPointerForDelegate(seekDelegate);
+	auto seekCallback = static_cast<FLAC__StreamDecoderSeekCallback>(seekFp.ToPointer());
+
+	auto tellDelegate = gcnew StreamDecoderTell(this, &StreamDecoder::Tell);
+	this->tellHandle = GCHandle::Alloc(tellDelegate);
+	IntPtr tellFp = Marshal::GetFunctionPointerForDelegate(tellDelegate);
+	auto tellCallback = static_cast<FLAC__StreamDecoderTellCallback>(tellFp.ToPointer());
+
+	auto lengthDelegate = gcnew StreamDecoderLength(this, &StreamDecoder::Length);
+	this->lengthHandle = GCHandle::Alloc(lengthDelegate);
+	IntPtr lengthFp = Marshal::GetFunctionPointerForDelegate(lengthDelegate);
+	auto lengthCallback = static_cast<FLAC__StreamDecoderLengthCallback>(lengthFp.ToPointer());
+
+	auto eofDelegate = gcnew StreamDecoderEof(this, &StreamDecoder::Eof);
+	this->eofHandle = GCHandle::Alloc(eofDelegate);
+	IntPtr eofFp = Marshal::GetFunctionPointerForDelegate(eofDelegate);
+	auto eofCallback = static_cast<FLAC__StreamDecoderEofCallback>(eofFp.ToPointer());
+
+	auto writeDelegate = gcnew StreamDecoderWrite(this, &StreamDecoder::Write);
+	this->writeHandle = GCHandle::Alloc(writeDelegate);
+	IntPtr writeFp = Marshal::GetFunctionPointerForDelegate(writeDelegate);
+	auto writeCallback = static_cast<FLAC__StreamDecoderWriteCallback>(writeFp.ToPointer());
+
+	auto metadataDelegate = gcnew StreamDecoderMetadata(this, &StreamDecoder::Metadata);
+	this->metadataHandle = GCHandle::Alloc(metadataDelegate);
+	IntPtr metadataFp = Marshal::GetFunctionPointerForDelegate(metadataDelegate);
+	auto metadataCallback = static_cast<FLAC__StreamDecoderMetadataCallback>(metadataFp.ToPointer());
+
+	auto errorDelegate = gcnew StreamDecoderError(this, &StreamDecoder::Error);
+	this->errorHandle = GCHandle::Alloc(errorDelegate);
+	IntPtr errorFp = Marshal::GetFunctionPointerForDelegate(errorDelegate);
+	auto errorCallback = static_cast<FLAC__StreamDecoderErrorCallback>(errorFp.ToPointer());
+
+	FLAC__StreamDecoderInitStatus status = FLAC__stream_decoder_init_ogg_stream(
+		this->decoder,
+		readCallback,
+		seekCallback,
+		tellCallback,
+		lengthCallback,
+		eofCallback,
+		writeCallback,
+		metadataCallback,
+		errorCallback,
+		nullptr);
+
+	if (status != FLAC__StreamDecoderInitStatus::FLAC__STREAM_DECODER_INIT_STATUS_OK)
+	{
+		throw gcnew DecoderStreamException();
+	}
+}
+
 FLAC__StreamDecoderLengthStatus StreamDecoder::Length(const FLAC__StreamDecoder* decoder, FLAC__uint64* stream_length, void* client_data)
 {
 	return FLAC__StreamDecoderLengthStatus::FLAC__STREAM_DECODER_LENGTH_STATUS_OK;

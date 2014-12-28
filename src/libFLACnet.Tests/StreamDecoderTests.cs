@@ -143,5 +143,19 @@
 
             Assert.AreEqual(decoder.GetDecodePosition(), expectedPosition);
         }
+
+        [TestMethod]
+        public void Initialize()
+        {
+            StreamDecoder decoder = new StreamDecoder();
+            decoder.Initialize();
+        }
+
+        [TestMethod]
+        public void InitializeOgg()
+        {
+            StreamDecoder decoder = new StreamDecoder();
+            decoder.InitializeOgg();
+        }
     }
 }

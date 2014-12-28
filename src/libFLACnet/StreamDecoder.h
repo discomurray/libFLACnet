@@ -105,6 +105,8 @@ namespace FLAC
 
 		void Initialize();
 
+		void InitializeOgg();
+
 		void SetMetadataIgnore(MetadataType type);
 
 		void SetMetadataIgnoreAll();
