@@ -323,5 +323,25 @@
 
             Assert.IsNotNull(verifyState);
         }
+
+        [TestMethod]
+        public void GetDecoderErrors_IsNotNull()
+        {
+            Encoder encoder = new Encoder(new MemoryStream());
+            DecoderErrorStats stats = encoder.GetDecoderErrorStats();
+
+            Assert.IsNotNull(stats);
+        }
+
+        [TestMethod]
+        public void GetDecoderErrors_Intialized_IsNotNull()
+        {
+            Encoder encoder = new Encoder(new MemoryStream());
+            encoder.Initialize();
+
+            DecoderErrorStats stats = encoder.GetDecoderErrorStats();
+
+            Assert.IsNotNull(stats);
+        }
     }
 }
