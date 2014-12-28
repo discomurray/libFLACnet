@@ -303,5 +303,25 @@
 
             Assert.IsNotNull(state);
         }
+
+        [TestMethod]
+        public void GetVerifyStreamState_IsNotNull()
+        {
+            Encoder encoder = new Encoder(new MemoryStream());
+            DecoderStreamState verifyState = encoder.GetVerifyStreamState();
+
+            Assert.IsNotNull(verifyState);
+        }
+
+        [TestMethod]
+        public void GetVerifyStreamState_Initialized_IsNotNull()
+        {
+            Encoder encoder = new Encoder(new MemoryStream());
+            encoder.Initialize();
+
+            DecoderStreamState verifyState = encoder.GetVerifyStreamState();
+
+            Assert.IsNotNull(verifyState);
+        }
     }
 }
