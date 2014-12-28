@@ -4,13 +4,13 @@
 
 namespace FLAC
 {
-	public ref class DecoderStream
+	public ref class Decoder
 	{
 		FLAC__StreamDecoder* decoder;
 
 	public:
-		DecoderStream();
-		~DecoderStream();
+		Decoder();
+		~Decoder();
 
 		property bool IsValid { bool get(); }
 
