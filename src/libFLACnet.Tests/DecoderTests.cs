@@ -29,12 +29,19 @@
         }
 
         [TestMethod]
-        public void SetMetadataRespondApplication_()
+        public void SetMetadataRespondApplication()
         {
             MetadataId id = new MetadataId { byte1 = 0x00, byte2 = 0x00, byte3 = 0x00, byte4 = 0x00 };
 
             Decoder decoder = new Decoder();
             decoder.SetMetadataRespondApplication(id);
+        }
+
+        [TestMethod]
+        public void SetMetadataRespondAll()
+        {
+            Decoder decoder = new Decoder();
+            decoder.SetMetadataRespondAll();
         }
     }
 }

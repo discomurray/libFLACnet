@@ -53,6 +53,16 @@ void Decoder::SetMetadataRespond(MetadataType type)
 	}
 }
 
+void Decoder::SetMetadataRespondAll()
+{
+	FLAC__ASSERT(this->IsValid);
+
+	if (FLAC__stream_decoder_set_metadata_respond_all(this->decoder) == 0)
+	{
+		throw gcnew DecoderStreamException();
+	}
+}
+
 void Decoder::SetMetadataRespondApplication(MetadataId^ id)
 {
 	FLAC__ASSERT(this->IsValid);

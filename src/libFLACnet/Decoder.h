@@ -28,6 +28,8 @@ namespace FLAC
 
 		void SetMetadataRespond(MetadataType type);
 
+		void SetMetadataRespondAll();
+
 		void SetMetadataRespondApplication(MetadataId^ id);
 
 		void SetOggSerialNumber(long serialNumber);
