@@ -229,6 +229,20 @@
         }
 
         [TestMethod]
+        public void ExhaustiveModelSearch_SetFalse()
+        {
+            Encoder encoder = new Encoder(new MemoryStream());
+            encoder.ExhaustiveModelSearch = false;
+        }
+
+        [TestMethod]
+        public void ExhaustiveModelSearch_SetTrue()
+        {
+            Encoder encoder = new Encoder(new MemoryStream());
+            encoder.ExhaustiveModelSearch = true;
+        }
+
+        [TestMethod]
         public void ResidualPartitionOrderMinimum_SetZero()
         {
             Encoder encoder = new Encoder(new MemoryStream());
