@@ -434,5 +434,20 @@ FLAC__StreamEncoderTellStatus Encoder::TellCallback(const FLAC__StreamEncoder* e
 
 FLAC__StreamEncoderWriteStatus Encoder::WriteCallback(const FLAC__StreamEncoder* encoder, const FLAC__byte buffer[], size_t bytes, unsigned samples, unsigned current_frame, void* client_data)
 {
+	array<unsigned char>^ managedBuffer = gcnew array<unsigned char>(bytes);
+	for (unsigned int i = 0; i < bytes; i++)
+	{
+		managedBuffer[i] = buffer[i];
+	}
+
+	try
+	{
+		this->stream->Write(managedBuffer, 0, bytes);
+	}
+	catch (Exception^)
+	{
+		return FLAC__StreamEncoderWriteStatus::FLAC__STREAM_ENCODER_WRITE_STATUS_FATAL_ERROR;
+	}
+
 	return FLAC__StreamEncoderWriteStatus::FLAC__STREAM_ENCODER_WRITE_STATUS_OK;
 }
