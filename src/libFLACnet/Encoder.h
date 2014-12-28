@@ -12,6 +12,9 @@ namespace FLAC
 	private delegate FLAC__StreamEncoderWriteStatus EncoderStreamWriteCallback(const FLAC__StreamEncoder* encoder, const FLAC__byte buffer[], size_t bytes, unsigned samples, unsigned current_frame, void* client_data);
 
 	[System::Runtime::InteropServices::UnmanagedFunctionPointer(System::Runtime::InteropServices::CallingConvention::Cdecl)]
+	private delegate FLAC__StreamEncoderReadStatus EncoderStreamReadCallback(const FLAC__StreamEncoder* encoder, FLAC__byte buffer[], size_t* bytes, void* client_data);
+
+	[System::Runtime::InteropServices::UnmanagedFunctionPointer(System::Runtime::InteropServices::CallingConvention::Cdecl)]
 	private delegate FLAC__StreamEncoderSeekStatus EncoderStreamSeekCallback(const FLAC__StreamEncoder* encoder, FLAC__uint64 absolute_byte_offset, void* client_data);
 
 	[System::Runtime::InteropServices::UnmanagedFunctionPointer(System::Runtime::InteropServices::CallingConvention::Cdecl)]
@@ -25,6 +28,8 @@ namespace FLAC
 		FLAC__StreamEncoder* encoder;
 
 		System::Runtime::InteropServices::GCHandle metadataHandle;
+
+		System::Runtime::InteropServices::GCHandle readHandle;
 
 		System::Runtime::InteropServices::GCHandle seekHandle;
 
@@ -149,6 +154,7 @@ namespace FLAC
 		DecoderStreamState^ GetVerifyStreamState();
 
 		void Initialize();
+		void InitializeOgg();
 
 		void Process(array<array<int>^>^ samples, unsigned int sampleCount);
 
@@ -162,6 +168,8 @@ namespace FLAC
 
 	private:
 		void MetadataCallback(const FLAC__StreamEncoder* encoder, const FLAC__StreamMetadata* metadata, void* client_data);
+
+		FLAC__StreamEncoderReadStatus ReadCallback(const FLAC__StreamEncoder* encoder, FLAC__byte buffer[], size_t* bytes, void* client_data);
 
 		FLAC__StreamEncoderSeekStatus SeekCallback(const FLAC__StreamEncoder* encoder, FLAC__uint64 absolute_byte_offset, void* client_data);
 
