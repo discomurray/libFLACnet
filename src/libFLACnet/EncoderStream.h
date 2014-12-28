@@ -154,6 +154,8 @@ namespace FLAC
 
 		void SetApodization(System::String^ specification);
 
+		void SetCompressionLevel(unsigned int level);
+
 		void SetOggSerialNumber(long serialNumber);
 
 	private:

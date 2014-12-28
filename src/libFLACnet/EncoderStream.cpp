@@ -393,6 +393,16 @@ FLAC__StreamEncoderSeekStatus EncoderStream::SeekCallback(const FLAC__StreamEnco
 	return FLAC__StreamEncoderSeekStatus::FLAC__STREAM_ENCODER_SEEK_STATUS_OK;
 }
 
+void EncoderStream::SetCompressionLevel(unsigned int level)
+{
+	FLAC__ASSERT(this->IsValid);
+
+	if (FLAC__stream_encoder_set_compression_level(this->encoder, level) == 0)
+	{
+		throw gcnew EncoderStreamException();
+	}
+}
+
 void EncoderStream::SetApodization(String^ specification)
 {
 	FLAC__ASSERT(this->IsValid);
