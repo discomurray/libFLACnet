@@ -17,6 +17,11 @@ namespace FLAC
 		Decoder();
 		~Decoder();
 
+		property unsigned int BitsPerSample
+		{
+			unsigned int get();
+		}
+
 		property ChannelAssignment ChannelAssignment
 		{
 			FLAC::ChannelAssignment get();

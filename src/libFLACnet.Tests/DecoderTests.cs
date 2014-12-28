@@ -103,5 +103,15 @@
             Decoder decoder = new Decoder();
             Assert.AreEqual(decoder.ChannelAssignment, assignment);
         }
+
+        [TestMethod]
+        public void BitsPerSample()
+        {
+            uint expectedBitsPerSample = 0;
+
+            Decoder decoder = new Decoder();
+
+            Assert.AreEqual(decoder.BitsPerSample, expectedBitsPerSample);
+        }
     }
 }
