@@ -132,5 +132,131 @@
             Encoder encoder = new Encoder();
             encoder.BlockSize = 0;
         }
+
+        [TestMethod]
+        public void MidSideStereo_SetFalse()
+        {
+            Encoder encoder = new Encoder();
+            encoder.MidSideStereo = false;
+        }
+
+        [TestMethod]
+        public void MidSideStereo_SetTrue()
+        {
+            Encoder encoder = new Encoder();
+            encoder.MidSideStereo = true;
+        }
+
+        [TestMethod]
+        public void LooseMidSideStereo_SetTrue()
+        {
+            Encoder encoder = new Encoder();
+            encoder.LooseMidSideStereo = true;
+        }
+
+        [TestMethod]
+        public void LooseMidSideStereo_SetFalse()
+        {
+            Encoder encoder = new Encoder();
+            encoder.LooseMidSideStereo = false;
+        }
+
+        [TestMethod]
+        public void MaxLpcOrder_SetZero()
+        {
+            Encoder encoder = new Encoder();
+            encoder.MaxLpcOrder = 0;
+        }
+
+        [TestMethod]
+        public void MaxLpcOrder_SetMaxValue()
+        {
+            Encoder encoder = new Encoder();
+            encoder.MaxLpcOrder = uint.MaxValue;
+        }
+
+        [TestMethod]
+        public void QlpCoeffPrecision_SetZero()
+        {
+            Encoder encoder = new Encoder();
+            encoder.QlpCoeffPrecision = 0;
+        }
+
+        [TestMethod]
+        public void QlpCoeffPrecision_SetMaxValue()
+        {
+            Encoder encoder = new Encoder();
+            encoder.QlpCoeffPrecision = uint.MaxValue;
+        }
+
+        [TestMethod]
+        public void QlpCoeffPrecisionSearch_SetFalse()
+        {
+            Encoder encoder = new Encoder();
+            encoder.QlpCoeffPrecisionSearch = false;
+        }
+
+        [TestMethod]
+        public void QlpCoeffPrecisionSearch_SetTrue()
+        {
+            Encoder encoder = new Encoder();
+            encoder.QlpCoeffPrecisionSearch = true;
+        }
+
+        [TestMethod]
+        public void EscapeCoding_SetFalse()
+        {
+            Encoder encoder = new Encoder();
+            encoder.EscapeCoding = false;
+        }
+
+        [TestMethod]
+        public void EscapeCoding_SetTrue()
+        {
+            Encoder encoder = new Encoder();
+            encoder.EscapeCoding = true;
+        }
+
+        [TestMethod]
+        public void ResidualPartitionOrderMinimum_SetZero()
+        {
+            Encoder encoder = new Encoder();
+            encoder.ResidualPartitionOrderMinimum = 0;
+        }
+
+        [TestMethod]
+        public void ResidualPartitionOrderMinimum_SetMaxValue()
+        {
+            Encoder encoder = new Encoder();
+            encoder.ResidualPartitionOrderMinimum = uint.MaxValue;
+        }
+
+        [TestMethod]
+        public void ResidualPartitionOrderMaximum_SetZero()
+        {
+            Encoder encoder = new Encoder();
+            encoder.ResidualPartitionOrderMaximum = 0;
+        }
+
+        [TestMethod]
+        public void ResidualPartitionOrderMaximum_SetMaxValue()
+        {
+            Encoder encoder = new Encoder();
+            encoder.ResidualPartitionOrderMaximum = uint.MaxValue;
+        }
+
+        [TestMethod]
+        public void TotalSamplesEstimate_SetZero()
+        {
+            Encoder encoder = new Encoder();
+            encoder.TotalSamplesEstimate = 0;
+        }
+
+        [TestMethod]
+        public void TotalSamplesEstimate_SetMaxValue()
+        {
+            Encoder encoder = new Encoder();
+            encoder.TotalSamplesEstimate = ulong.MaxValue;
+        }
     }
 }
