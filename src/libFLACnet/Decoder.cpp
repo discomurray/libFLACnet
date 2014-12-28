@@ -53,6 +53,16 @@ void Decoder::SetMetadataIgnore(MetadataType type)
 	}
 }
 
+void Decoder::SetMetadataIgnoreAll()
+{
+	FLAC__ASSERT(this->IsValid);
+
+	if (FLAC__stream_decoder_set_metadata_ignore_all(this->decoder) == 0)
+	{
+		throw gcnew DecoderStreamException();
+	}
+}
+
 void Decoder::SetMetadataIgnoreApplication(MetadataId^ id)
 {
 	FLAC__ASSERT(this->IsValid);

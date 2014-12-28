@@ -29,6 +29,13 @@
         }
 
         [TestMethod]
+        public void SetMetadataIgnoreAll()
+        {
+            Decoder decoder = new Decoder();
+            decoder.SetMetadataIgnoreAll();
+        }
+
+        [TestMethod]
         public void SetMetadataIgnoreApplication()
         {
             MetadataId id = new MetadataId { byte1 = 0x00, byte2 = 0x00, byte3 = 0x00, byte4 = 0x00 };
