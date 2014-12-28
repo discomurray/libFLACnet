@@ -28,6 +28,13 @@ unsigned int Decoder::BitsPerSample::get()
 	return FLAC__stream_decoder_get_bits_per_sample(this->decoder);
 }
 
+unsigned int Decoder::BlockSize::get()
+{
+	FLAC__ASSERT(this->IsValid);
+
+	return FLAC__stream_decoder_get_blocksize(this->decoder);
+}
+
 ChannelAssignment Decoder::ChannelAssignment::get()
 {
 	FLAC__ASSERT(this->IsValid);

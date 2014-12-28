@@ -22,6 +22,11 @@ namespace FLAC
 			unsigned int get();
 		}
 
+		property unsigned int BlockSize
+		{
+			unsigned int get();
+		}
+
 		property ChannelAssignment ChannelAssignment
 		{
 			FLAC::ChannelAssignment get();

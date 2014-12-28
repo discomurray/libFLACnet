@@ -123,5 +123,15 @@
 
             Assert.AreEqual(decoder.SampleRate, expectedSampleRate);
         }
+
+        [TestMethod]
+        public void BlockSize()
+        {
+            uint expectedBlockSize = 0;
+
+            Decoder decoder = new Decoder();
+
+            Assert.AreEqual(decoder.BlockSize, expectedBlockSize);
+        }
     }
 }
