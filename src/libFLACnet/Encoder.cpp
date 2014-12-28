@@ -434,12 +434,46 @@ void Encoder::ProcessInterleaved(array<int>^ samples, unsigned int sampleCount)
 
 FLAC__StreamEncoderReadStatus Encoder::ReadCallback(const FLAC__StreamEncoder* encoder, FLAC__byte buffer[], size_t* bytes, void* client_data)
 {
-	return FLAC__StreamEncoderReadStatus::FLAC__STREAM_ENCODER_READ_STATUS_CONTINUE;
+	array<unsigned char>^ managedBuffer = gcnew array<unsigned char>(*bytes);
+
+	try
+	{
+		int read = this->stream->Read(managedBuffer, 0, *bytes);
+		if (read == 0)
+		{
+			return FLAC__StreamEncoderReadStatus::FLAC__STREAM_ENCODER_READ_STATUS_END_OF_STREAM;
+		}
+
+		*bytes = read;
+		for (size_t i = 0; i < read; i++)
+		{
+			buffer[i] = managedBuffer[i];
+		}
+
+		return FLAC__StreamEncoderReadStatus::FLAC__STREAM_ENCODER_READ_STATUS_CONTINUE;
+	}
+	catch (Exception^)
+	{
+		return FLAC__StreamEncoderReadStatus::FLAC__STREAM_ENCODER_READ_STATUS_ABORT;
+	}
 }
 
 FLAC__StreamEncoderSeekStatus Encoder::SeekCallback(const FLAC__StreamEncoder* encoder, FLAC__uint64 absolute_byte_offset, void* client_data)
 {
-	return FLAC__StreamEncoderSeekStatus::FLAC__STREAM_ENCODER_SEEK_STATUS_OK;
+	if (!this->stream->CanSeek)
+	{
+		return FLAC__STREAM_ENCODER_SEEK_STATUS_UNSUPPORTED;
+	}
+
+	try
+	{
+		this->stream->Seek(absolute_byte_offset, SeekOrigin::Begin);
+		return FLAC__StreamEncoderSeekStatus::FLAC__STREAM_ENCODER_SEEK_STATUS_OK;
+	}
+	catch (Exception^)
+	{
+		return FLAC__StreamEncoderSeekStatus::FLAC__STREAM_ENCODER_SEEK_STATUS_ERROR;
+	}
 }
 
 void Encoder::SetCompressionLevel(unsigned int level)
