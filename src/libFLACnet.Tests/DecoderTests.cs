@@ -20,6 +20,14 @@
         }
 
         [TestMethod]
+        public void GetState_IsNotNull()
+        {
+            Decoder decoder = new Decoder();
+
+            Assert.IsNotNull(decoder.GetState());
+        }
+
+        [TestMethod]
         public void SetMetadataIgnore_StreamInfo()
         {
             MetadataType streamInfo = MetadataType.StreamInfo;

@@ -43,6 +43,13 @@ void Decoder::Md5Checking::set(bool value)
 	}
 }
 
+DecoderStreamState^ Decoder::GetState()
+{
+	FLAC__ASSERT(this->IsValid);
+
+	return gcnew DecoderStreamState(FLAC__stream_decoder_get_state(this->decoder));
+}
+
 void Decoder::SetMetadataIgnore(MetadataType type)
 {
 	FLAC__ASSERT(this->IsValid);

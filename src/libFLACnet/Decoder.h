@@ -2,6 +2,7 @@
 
 #include <FLAC\stream_decoder.h>
 
+#include "DecoderStreamState.h"
 #include "MetadataId.h"
 #include "MetadataType.h"
 
@@ -25,6 +26,8 @@ namespace FLAC
 			bool get();
 			void set(bool value);
 		}
+
+		DecoderStreamState^ GetState();
 
 		void SetMetadataIgnore(MetadataType type);
 
