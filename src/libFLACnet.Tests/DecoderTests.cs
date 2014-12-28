@@ -20,6 +20,15 @@
         }
 
         [TestMethod]
+        public void SetMetadataIgnore_StreamInfo()
+        {
+            MetadataType streamInfo = MetadataType.StreamInfo;
+
+            Decoder decoder = new Decoder();
+            decoder.SetMetadataIgnore(streamInfo);
+        }
+
+        [TestMethod]
         public void SetMetadataRespond_StreamInfo()
         {
             Decoder decoder = new Decoder();

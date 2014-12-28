@@ -26,6 +26,8 @@ namespace FLAC
 			void set(bool value);
 		}
 
+		void SetMetadataIgnore(MetadataType type);
+
 		void SetMetadataRespond(MetadataType type);
 
 		void SetMetadataRespondAll();
