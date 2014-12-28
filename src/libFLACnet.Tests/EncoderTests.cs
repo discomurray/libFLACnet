@@ -9,21 +9,21 @@
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
-    public class EncoderStreamTests
+    public class EncoderTests
     {
         [TestMethod]
         public void Construction_IsValid()
         {
-            EncoderStream stream = new EncoderStream();
+            Encoder encoder = new Encoder();
 
-            Assert.IsTrue(stream.IsValid);
+            Assert.IsTrue(encoder.IsValid);
         }
 
         [TestMethod]
         public void Initialize()
         {
-            EncoderStream stream = new EncoderStream();
-            stream.Initialize();
+            Encoder encoder = new Encoder();
+            encoder.Initialize();
         }
 
         [TestMethod]
@@ -31,106 +31,106 @@
         {
             int serial = 12345;
 
-            EncoderStream stream = new EncoderStream();
-            stream.SetOggSerialNumber(serial);
+            Encoder encoder = new Encoder();
+            encoder.SetOggSerialNumber(serial);
         }
 
         [TestMethod]
         public void Verify_SetTrue()
         {
-            EncoderStream stream = new EncoderStream();
-            stream.Verify = true;
+            Encoder encoder = new Encoder();
+            encoder.Verify = true;
         }
 
         [TestMethod]
         public void Verify_SetFalse()
         {
-            EncoderStream stream = new EncoderStream();
-            stream.Verify = false;
+            Encoder encoder = new Encoder();
+            encoder.Verify = false;
         }
 
         [TestMethod]
         public void StreamableSubet_SetTrue()
         {
-            EncoderStream stream = new EncoderStream();
-            stream.StreamableSubset = true;
+            Encoder encoder = new Encoder();
+            encoder.StreamableSubset = true;
         }
 
         [TestMethod]
         public void StreamableSubet_SetFalse()
         {
-            EncoderStream stream = new EncoderStream();
-            stream.StreamableSubset = false;
+            Encoder encoder = new Encoder();
+            encoder.StreamableSubset = false;
         }
 
         [TestMethod]
         public void Channels_SetOne()
         {
-            EncoderStream stream = new EncoderStream();
-            stream.Channels = 1;
+            Encoder encoder = new Encoder();
+            encoder.Channels = 1;
         }
 
         [TestMethod]
         public void Channels_SetTwo()
         {
-            EncoderStream stream = new EncoderStream();
-            stream.Channels = 2;
+            Encoder encoder = new Encoder();
+            encoder.Channels = 2;
         }
 
         [TestMethod]
         public void BitsPerSample_SetEight()
         {
-            EncoderStream stream = new EncoderStream();
-            stream.BitsPerSample = 8;
+            Encoder encoder = new Encoder();
+            encoder.BitsPerSample = 8;
         }
 
         [TestMethod]
         public void BitsPerSample_SetSixteen()
         {
-            EncoderStream stream = new EncoderStream();
-            stream.BitsPerSample = 16;
+            Encoder encoder = new Encoder();
+            encoder.BitsPerSample = 16;
         }
 
         [TestMethod]
         public void SampleRate_Set44100()
         {
-            EncoderStream stream = new EncoderStream();
-            stream.SampleRate = 44100;
+            Encoder encoder = new Encoder();
+            encoder.SampleRate = 44100;
         }
 
         [TestMethod]
         public void SampleRate_Set39012()
         {
-            EncoderStream stream = new EncoderStream();
-            stream.SampleRate = 39012;
+            Encoder encoder = new Encoder();
+            encoder.SampleRate = 39012;
         }
 
         [TestMethod]
         public void SetCompressionLevel_SetZero()
         {
-            EncoderStream stream = new EncoderStream();
-            stream.SetCompressionLevel(0);
+            Encoder encoder = new Encoder();
+            encoder.SetCompressionLevel(0);
         }
 
         [TestMethod]
         public void SetCompressionLevel_SetMaximum()
         {
-            EncoderStream stream = new EncoderStream();
-            stream.SetCompressionLevel(uint.MaxValue);
+            Encoder encoder = new Encoder();
+            encoder.SetCompressionLevel(uint.MaxValue);
         }
 
         [TestMethod]
         public void BlockSize_Set576()
         {
-            EncoderStream stream = new EncoderStream();
-            stream.BlockSize = 576;
+            Encoder encoder = new Encoder();
+            encoder.BlockSize = 576;
         }
 
         [TestMethod]
         public void BlockSize_Set0()
         {
-            EncoderStream stream = new EncoderStream();
-            stream.BlockSize = 0;
+            Encoder encoder = new Encoder();
+            encoder.BlockSize = 0;
         }
     }
 }

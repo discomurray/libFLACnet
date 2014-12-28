@@ -141,7 +141,7 @@
     <ClInclude Include="DecoderStream.h" />
     <ClInclude Include="DecoderStreamException.h" />
     <ClInclude Include="DecoderStreamState.h" />
-    <ClInclude Include="EncoderStream.h" />
+    <ClInclude Include="Encoder.h" />
     <ClInclude Include="EncoderStreamException.h" />
     <ClInclude Include="EncoderStreamState.h" />
     <ClInclude Include="resource.h" />
@@ -153,7 +153,7 @@
     <ClCompile Include="DecoderStream.cpp" />
     <ClCompile Include="DecoderStreamException.cpp" />
     <ClCompile Include="DecoderStreamState.cpp" />
-    <ClCompile Include="EncoderStream.cpp" />
+    <ClCompile Include="Encoder.cpp" />
     <ClCompile Include="EncoderStreamException.cpp" />
     <ClCompile Include="EncoderStreamState.cpp" />
     <ClCompile Include="Stdafx.cpp">

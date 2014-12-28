@@ -20,7 +20,7 @@ namespace FLAC
 	[System::Runtime::InteropServices::UnmanagedFunctionPointer(System::Runtime::InteropServices::CallingConvention::Cdecl)]
 	private delegate void EncoderStreamMetadataCallback(const FLAC__StreamEncoder* encoder, const FLAC__StreamMetadata* metadata, void* client_data);
 
-	public ref class EncoderStream
+	public ref class Encoder
 	{
 		FLAC__StreamEncoder* encoder;
 
@@ -33,9 +33,9 @@ namespace FLAC
 		System::Runtime::InteropServices::GCHandle writeHandle;
 
 	public:
-		EncoderStream();
+		Encoder();
 
-		~EncoderStream();
+		~Encoder();
 
 		property unsigned int BitsPerSample
 		{
