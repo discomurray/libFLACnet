@@ -283,5 +283,25 @@
             Encoder encoder = new Encoder(new MemoryStream());
             encoder.TotalSamplesEstimate = ulong.MaxValue;
         }
+
+        [TestMethod]
+        public void GetState_IsNotNull()
+        {
+            Encoder encoder = new Encoder(new MemoryStream());
+            EncoderStreamState state = encoder.GetState();
+
+            Assert.IsNotNull(state);
+        }
+
+        [TestMethod]
+        public void GetState_Initialized_IsNotNull()
+        {
+            Encoder encoder = new Encoder(new MemoryStream());
+            encoder.Initialize();
+
+            EncoderStreamState state = encoder.GetState();
+
+            Assert.IsNotNull(state);
+        }
     }
 }
