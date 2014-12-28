@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "Encoder.h"
+#include "StreamEncoder.h"
 
 #include <vector>
 
@@ -16,13 +16,13 @@ using namespace FLAC;
 
 using namespace msclr::interop;
 
-Encoder::Encoder(Stream^ stream)
+StreamEncoder::StreamEncoder(Stream^ stream)
 	: encoder(FLAC__stream_encoder_new()),
 	  stream(stream)
 {
 }
 
-Encoder::~Encoder()
+StreamEncoder::~StreamEncoder()
 {
 	this->metadataHandle.Free();
 	this->seekHandle.Free();
@@ -36,13 +36,13 @@ Encoder::~Encoder()
 	}
 }
 
-unsigned int Encoder::BitsPerSample::get()
+unsigned int StreamEncoder::BitsPerSample::get()
 {
 	FLAC__ASSERT(this->IsValid);
 	return FLAC__stream_encoder_get_bits_per_sample(this->encoder);
 }
 
-void Encoder::BitsPerSample::set(unsigned int value)
+void StreamEncoder::BitsPerSample::set(unsigned int value)
 {
 	FLAC__ASSERT(this->IsValid);
 	if (FLAC__stream_encoder_set_bits_per_sample(this->encoder, value) == 0)
@@ -51,13 +51,13 @@ void Encoder::BitsPerSample::set(unsigned int value)
 	}
 }
 
-unsigned int Encoder::BlockSize::get()
+unsigned int StreamEncoder::BlockSize::get()
 {
 	FLAC__ASSERT(this->IsValid);
 	return FLAC__stream_encoder_get_blocksize(this->encoder);
 }
 
-void Encoder::BlockSize::set(unsigned int value)
+void StreamEncoder::BlockSize::set(unsigned int value)
 {
 	FLAC__ASSERT(this->IsValid);
 	if (FLAC__stream_encoder_set_blocksize(this->encoder, value) == 0)
@@ -66,13 +66,13 @@ void Encoder::BlockSize::set(unsigned int value)
 	}
 }
 
-unsigned int Encoder::Channels::get()
+unsigned int StreamEncoder::Channels::get()
 {
 	FLAC__ASSERT(this->IsValid);
 	return FLAC__stream_encoder_get_channels(this->encoder);
 }
 
-void Encoder::Channels::set(unsigned int value)
+void StreamEncoder::Channels::set(unsigned int value)
 {
 	FLAC__ASSERT(this->IsValid);
 	if (FLAC__stream_encoder_set_channels(this->encoder, value) == 0)
@@ -81,13 +81,13 @@ void Encoder::Channels::set(unsigned int value)
 	}
 }
 
-bool Encoder::EscapeCoding::get()
+bool StreamEncoder::EscapeCoding::get()
 {
 	FLAC__ASSERT(this->IsValid);
 	return FLAC__stream_encoder_get_do_escape_coding(this->encoder) != 0;
 }
 
-void Encoder::EscapeCoding::set(bool value)
+void StreamEncoder::EscapeCoding::set(bool value)
 {
 	FLAC__ASSERT(this->IsValid);
 	if (FLAC__stream_encoder_set_do_escape_coding(this->encoder, value) == 0)
@@ -96,13 +96,13 @@ void Encoder::EscapeCoding::set(bool value)
 	}
 }
 
-bool Encoder::ExhaustiveModelSearch::get()
+bool StreamEncoder::ExhaustiveModelSearch::get()
 {
 	FLAC__ASSERT(this->IsValid);
 	return FLAC__stream_encoder_get_do_exhaustive_model_search(this->encoder) != 0;
 }
 
-void Encoder::ExhaustiveModelSearch::set(bool value)
+void StreamEncoder::ExhaustiveModelSearch::set(bool value)
 {
 	FLAC__ASSERT(this->IsValid);
 	if (FLAC__stream_encoder_set_do_exhaustive_model_search(this->encoder, value) == 0)
@@ -111,19 +111,19 @@ void Encoder::ExhaustiveModelSearch::set(bool value)
 	}
 }
 
-bool Encoder::IsValid::get()
+bool StreamEncoder::IsValid::get()
 {
 	return this->encoder != nullptr;
 }
 
 
-bool Encoder::LooseMidSideStereo::get()
+bool StreamEncoder::LooseMidSideStereo::get()
 {
 	FLAC__ASSERT(this->IsValid);
 	return FLAC__stream_encoder_get_loose_mid_side_stereo(this->encoder) != 0;
 }
 
-void Encoder::LooseMidSideStereo::set(bool value)
+void StreamEncoder::LooseMidSideStereo::set(bool value)
 {
 	FLAC__ASSERT(this->IsValid);
 	if (FLAC__stream_encoder_set_loose_mid_side_stereo(this->encoder, value) == 0)
@@ -132,13 +132,13 @@ void Encoder::LooseMidSideStereo::set(bool value)
 	}
 }
 
-unsigned int Encoder::MaxLpcOrder::get()
+unsigned int StreamEncoder::MaxLpcOrder::get()
 {
 	FLAC__ASSERT(this->IsValid);
 	return FLAC__stream_encoder_get_max_lpc_order(this->encoder);
 }
 
-void Encoder::MaxLpcOrder::set(unsigned int value)
+void StreamEncoder::MaxLpcOrder::set(unsigned int value)
 {
 	FLAC__ASSERT(this->IsValid);
 	if (FLAC__stream_encoder_set_max_lpc_order(this->encoder, value) == 0)
@@ -147,13 +147,13 @@ void Encoder::MaxLpcOrder::set(unsigned int value)
 	}
 }
 
-bool Encoder::MidSideStereo::get()
+bool StreamEncoder::MidSideStereo::get()
 {
 	FLAC__ASSERT(this->IsValid);
 	return FLAC__stream_encoder_get_do_mid_side_stereo(this->encoder) != 0;
 }
 
-void Encoder::MidSideStereo::set(bool value)
+void StreamEncoder::MidSideStereo::set(bool value)
 {
 	FLAC__ASSERT(this->IsValid);
 	if (FLAC__stream_encoder_set_do_mid_side_stereo(this->encoder, value) == 0)
@@ -162,13 +162,13 @@ void Encoder::MidSideStereo::set(bool value)
 	}
 }
 
-unsigned int Encoder::ResidualPartitionOrderMinimum::get()
+unsigned int StreamEncoder::ResidualPartitionOrderMinimum::get()
 {
 	FLAC__ASSERT(this->IsValid);
 	return FLAC__stream_encoder_get_min_residual_partition_order(this->encoder);
 }
 
-void Encoder::ResidualPartitionOrderMinimum::set(unsigned int value)
+void StreamEncoder::ResidualPartitionOrderMinimum::set(unsigned int value)
 {
 	FLAC__ASSERT(this->IsValid);
 	if (FLAC__stream_encoder_set_min_residual_partition_order(this->encoder, value) == 0)
@@ -177,13 +177,13 @@ void Encoder::ResidualPartitionOrderMinimum::set(unsigned int value)
 	}
 }
 
-unsigned int Encoder::ResidualPartitionOrderMaximum::get()
+unsigned int StreamEncoder::ResidualPartitionOrderMaximum::get()
 {
 	FLAC__ASSERT(this->IsValid);
 	return FLAC__stream_encoder_get_max_residual_partition_order(this->encoder);
 }
 
-void Encoder::ResidualPartitionOrderMaximum::set(unsigned int value)
+void StreamEncoder::ResidualPartitionOrderMaximum::set(unsigned int value)
 {
 	FLAC__ASSERT(this->IsValid);
 	if (FLAC__stream_encoder_set_max_residual_partition_order(this->encoder, value) == 0)
@@ -192,13 +192,13 @@ void Encoder::ResidualPartitionOrderMaximum::set(unsigned int value)
 	}
 }
 
-unsigned int Encoder::QlpCoeffPrecision::get()
+unsigned int StreamEncoder::QlpCoeffPrecision::get()
 {
 	FLAC__ASSERT(this->IsValid);
 	return FLAC__stream_encoder_get_qlp_coeff_precision(this->encoder);
 }
 
-void Encoder::QlpCoeffPrecision::set(unsigned int value)
+void StreamEncoder::QlpCoeffPrecision::set(unsigned int value)
 {
 	FLAC__ASSERT(this->IsValid);
 	if (FLAC__stream_encoder_set_qlp_coeff_precision(this->encoder, value) == 0)
@@ -207,13 +207,13 @@ void Encoder::QlpCoeffPrecision::set(unsigned int value)
 	}
 }
 
-bool Encoder::QlpCoeffPrecisionSearch::get()
+bool StreamEncoder::QlpCoeffPrecisionSearch::get()
 {
 	FLAC__ASSERT(this->IsValid);
 	return FLAC__stream_encoder_get_do_qlp_coeff_prec_search(this->encoder) != 0;
 }
 
-void Encoder::QlpCoeffPrecisionSearch::set(bool value)
+void StreamEncoder::QlpCoeffPrecisionSearch::set(bool value)
 {
 	FLAC__ASSERT(this->IsValid);
 	if (FLAC__stream_encoder_set_do_qlp_coeff_prec_search(this->encoder, value) == 0)
@@ -222,13 +222,13 @@ void Encoder::QlpCoeffPrecisionSearch::set(bool value)
 	}
 }
 
-unsigned int Encoder::SampleRate::get()
+unsigned int StreamEncoder::SampleRate::get()
 {
 	FLAC__ASSERT(this->IsValid);
 	return FLAC__stream_encoder_get_sample_rate(this->encoder);
 }
 
-void Encoder::SampleRate::set(unsigned int value)
+void StreamEncoder::SampleRate::set(unsigned int value)
 {
 	FLAC__ASSERT(this->IsValid);
 	if (FLAC__stream_encoder_set_sample_rate(this->encoder, value) == 0)
@@ -237,13 +237,13 @@ void Encoder::SampleRate::set(unsigned int value)
 	}
 }
 
-bool Encoder::StreamableSubset::get()
+bool StreamEncoder::StreamableSubset::get()
 {
 	FLAC__ASSERT(this->IsValid);
 	return FLAC__stream_encoder_get_streamable_subset(this->encoder) != 0;
 }
 
-void Encoder::StreamableSubset::set(bool value)
+void StreamEncoder::StreamableSubset::set(bool value)
 {
 	FLAC__ASSERT(this->IsValid);
 	if (FLAC__stream_encoder_set_streamable_subset(this->encoder, value) == 0)
@@ -252,13 +252,13 @@ void Encoder::StreamableSubset::set(bool value)
 	}
 }
 
-unsigned long long Encoder::TotalSamplesEstimate::get()
+unsigned long long StreamEncoder::TotalSamplesEstimate::get()
 {
 	FLAC__ASSERT(this->IsValid);
 	return FLAC__stream_encoder_get_total_samples_estimate(this->encoder) != 0;
 }
 
-void Encoder::TotalSamplesEstimate::set(unsigned long long value)
+void StreamEncoder::TotalSamplesEstimate::set(unsigned long long value)
 {
 	FLAC__ASSERT(this->IsValid);
 	if (FLAC__stream_encoder_set_total_samples_estimate(this->encoder, value) == 0)
@@ -267,13 +267,13 @@ void Encoder::TotalSamplesEstimate::set(unsigned long long value)
 	}
 }
 
-bool Encoder::Verify::get()
+bool StreamEncoder::Verify::get()
 {
 	FLAC__ASSERT(this->IsValid);
 	return FLAC__stream_encoder_get_verify(this->encoder) != 0;
 }
 
-void Encoder::Verify::set(bool value)
+void StreamEncoder::Verify::set(bool value)
 {
 	FLAC__ASSERT(this->IsValid);
 	if (FLAC__stream_encoder_set_verify(this->encoder, value) == 0)
@@ -282,7 +282,7 @@ void Encoder::Verify::set(bool value)
 	}
 }
 
-void Encoder::Finish()
+void StreamEncoder::Finish()
 {
 	FLAC__ASSERT(this->IsValid);
 	if (FLAC__stream_encoder_finish(this->encoder) == 0)
@@ -291,43 +291,43 @@ void Encoder::Finish()
 	}
 }
 
-DecoderErrorStats^ Encoder::GetDecoderErrorStats()
+DecoderErrorStats^ StreamEncoder::GetDecoderErrorStats()
 {
 	return DecoderErrorStats::FromEncoder(this->encoder);
 }
 
-EncoderStreamState^ Encoder::GetState()
+EncoderStreamState^ StreamEncoder::GetState()
 {
 	FLAC__ASSERT(this->IsValid);
 	return gcnew EncoderStreamState(FLAC__stream_encoder_get_state(this->encoder));
 }
 
-DecoderStreamState^ Encoder::GetVerifyStreamState()
+DecoderStreamState^ StreamEncoder::GetVerifyStreamState()
 {
 	FLAC__ASSERT(this->IsValid);
 	return gcnew DecoderStreamState(FLAC__stream_encoder_get_verify_decoder_state(this->encoder));
 }
 
-void Encoder::Initialize()
+void StreamEncoder::Initialize()
 {
 	FLAC__ASSERT(this->IsValid);
 
-	auto writeDelegate = gcnew EncoderStreamWriteCallback(this, &Encoder::WriteCallback);
+	auto writeDelegate = gcnew EncoderStreamWriteCallback(this, &StreamEncoder::WriteCallback);
 	this->writeHandle = GCHandle::Alloc(writeDelegate);
 	IntPtr writeFp = Marshal::GetFunctionPointerForDelegate(writeDelegate);
 	auto writeCallback = static_cast<FLAC__StreamEncoderWriteCallback>(writeFp.ToPointer());
 
-	auto seekDelegate = gcnew EncoderStreamSeekCallback(this, &Encoder::SeekCallback);
+	auto seekDelegate = gcnew EncoderStreamSeekCallback(this, &StreamEncoder::SeekCallback);
 	this->seekHandle = GCHandle::Alloc(seekDelegate);
 	IntPtr seekFp = Marshal::GetFunctionPointerForDelegate(seekDelegate);
 	FLAC__StreamEncoderSeekCallback seekCallback = static_cast<FLAC__StreamEncoderSeekCallback>(seekFp.ToPointer());
 
-	auto tellDelegate = gcnew EncoderStreamTellCallback(this, &Encoder::TellCallback);
+	auto tellDelegate = gcnew EncoderStreamTellCallback(this, &StreamEncoder::TellCallback);
 	this->tellHandle = GCHandle::Alloc(tellDelegate);
 	IntPtr tellFp = Marshal::GetFunctionPointerForDelegate(tellDelegate);
 	FLAC__StreamEncoderTellCallback tellCallback = static_cast<FLAC__StreamEncoderTellCallback>(tellFp.ToPointer());
 
-	auto metadataDelegate = gcnew EncoderStreamMetadataCallback(this, &Encoder::MetadataCallback);
+	auto metadataDelegate = gcnew EncoderStreamMetadataCallback(this, &StreamEncoder::MetadataCallback);
 	this->metadataHandle = GCHandle::Alloc(metadataDelegate);
 	IntPtr metadataFp = Marshal::GetFunctionPointerForDelegate(metadataDelegate);
 	FLAC__StreamEncoderMetadataCallback metadataCallback = static_cast<FLAC__StreamEncoderMetadataCallback>(metadataFp.ToPointer());
@@ -340,31 +340,31 @@ void Encoder::Initialize()
 	}
 }
 
-void Encoder::InitializeOgg()
+void StreamEncoder::InitializeOgg()
 {
 	FLAC__ASSERT(this->IsValid);
 
-	auto writeDelegate = gcnew EncoderStreamWriteCallback(this, &Encoder::WriteCallback);
+	auto writeDelegate = gcnew EncoderStreamWriteCallback(this, &StreamEncoder::WriteCallback);
 	this->writeHandle = GCHandle::Alloc(writeDelegate);
 	IntPtr writeFp = Marshal::GetFunctionPointerForDelegate(writeDelegate);
 	auto writeCallback = static_cast<FLAC__StreamEncoderWriteCallback>(writeFp.ToPointer());
 
-	auto seekDelegate = gcnew EncoderStreamSeekCallback(this, &Encoder::SeekCallback);
+	auto seekDelegate = gcnew EncoderStreamSeekCallback(this, &StreamEncoder::SeekCallback);
 	this->seekHandle = GCHandle::Alloc(seekDelegate);
 	IntPtr seekFp = Marshal::GetFunctionPointerForDelegate(seekDelegate);
 	FLAC__StreamEncoderSeekCallback seekCallback = static_cast<FLAC__StreamEncoderSeekCallback>(seekFp.ToPointer());
 
-	auto tellDelegate = gcnew EncoderStreamTellCallback(this, &Encoder::TellCallback);
+	auto tellDelegate = gcnew EncoderStreamTellCallback(this, &StreamEncoder::TellCallback);
 	this->tellHandle = GCHandle::Alloc(tellDelegate);
 	IntPtr tellFp = Marshal::GetFunctionPointerForDelegate(tellDelegate);
 	FLAC__StreamEncoderTellCallback tellCallback = static_cast<FLAC__StreamEncoderTellCallback>(tellFp.ToPointer());
 
-	auto metadataDelegate = gcnew EncoderStreamMetadataCallback(this, &Encoder::MetadataCallback);
+	auto metadataDelegate = gcnew EncoderStreamMetadataCallback(this, &StreamEncoder::MetadataCallback);
 	this->metadataHandle = GCHandle::Alloc(metadataDelegate);
 	IntPtr metadataFp = Marshal::GetFunctionPointerForDelegate(metadataDelegate);
 	FLAC__StreamEncoderMetadataCallback metadataCallback = static_cast<FLAC__StreamEncoderMetadataCallback>(metadataFp.ToPointer());
 
-	auto readDelegate = gcnew EncoderStreamReadCallback(this, &Encoder::ReadCallback);
+	auto readDelegate = gcnew EncoderStreamReadCallback(this, &StreamEncoder::ReadCallback);
 	this->readHandle = GCHandle::Alloc(readDelegate);
 	IntPtr readFp = Marshal::GetFunctionPointerForDelegate(readDelegate);
 	auto readCallback = static_cast<FLAC__StreamEncoderReadCallback>(readFp.ToPointer());
@@ -377,11 +377,11 @@ void Encoder::InitializeOgg()
 	}
 }
 
-void Encoder::MetadataCallback(const FLAC__StreamEncoder* encoder, const FLAC__StreamMetadata* metadata, void* client_data)
+void StreamEncoder::MetadataCallback(const FLAC__StreamEncoder* encoder, const FLAC__StreamMetadata* metadata, void* client_data)
 {
 }
 
-void Encoder::Process(array<array<int>^>^ samples, unsigned int sampleCount)
+void StreamEncoder::Process(array<array<int>^>^ samples, unsigned int sampleCount)
 {
 	FLAC__ASSERT(this->IsValid);
 
@@ -416,7 +416,7 @@ void Encoder::Process(array<array<int>^>^ samples, unsigned int sampleCount)
 	}
 }
 
-void Encoder::ProcessInterleaved(array<int>^ samples, unsigned int sampleCount)
+void StreamEncoder::ProcessInterleaved(array<int>^ samples, unsigned int sampleCount)
 {
 	FLAC__ASSERT(this->IsValid);
 
@@ -432,7 +432,7 @@ void Encoder::ProcessInterleaved(array<int>^ samples, unsigned int sampleCount)
 	}
 }
 
-FLAC__StreamEncoderReadStatus Encoder::ReadCallback(const FLAC__StreamEncoder* encoder, FLAC__byte buffer[], size_t* bytes, void* client_data)
+FLAC__StreamEncoderReadStatus StreamEncoder::ReadCallback(const FLAC__StreamEncoder* encoder, FLAC__byte buffer[], size_t* bytes, void* client_data)
 {
 	array<unsigned char>^ managedBuffer = gcnew array<unsigned char>(*bytes);
 
@@ -445,7 +445,7 @@ FLAC__StreamEncoderReadStatus Encoder::ReadCallback(const FLAC__StreamEncoder* e
 		}
 
 		*bytes = read;
-		for (size_t i = 0; i < read; i++)
+		for (int i = 0; i < read; i++)
 		{
 			buffer[i] = managedBuffer[i];
 		}
@@ -458,7 +458,7 @@ FLAC__StreamEncoderReadStatus Encoder::ReadCallback(const FLAC__StreamEncoder* e
 	}
 }
 
-FLAC__StreamEncoderSeekStatus Encoder::SeekCallback(const FLAC__StreamEncoder* encoder, FLAC__uint64 absolute_byte_offset, void* client_data)
+FLAC__StreamEncoderSeekStatus StreamEncoder::SeekCallback(const FLAC__StreamEncoder* encoder, FLAC__uint64 absolute_byte_offset, void* client_data)
 {
 	if (!this->stream->CanSeek)
 	{
@@ -476,7 +476,7 @@ FLAC__StreamEncoderSeekStatus Encoder::SeekCallback(const FLAC__StreamEncoder* e
 	}
 }
 
-void Encoder::SetCompressionLevel(unsigned int level)
+void StreamEncoder::SetCompressionLevel(unsigned int level)
 {
 	FLAC__ASSERT(this->IsValid);
 
@@ -486,7 +486,7 @@ void Encoder::SetCompressionLevel(unsigned int level)
 	}
 }
 
-void Encoder::SetApodization(String^ specification)
+void StreamEncoder::SetApodization(String^ specification)
 {
 	FLAC__ASSERT(this->IsValid);
 
@@ -499,7 +499,7 @@ void Encoder::SetApodization(String^ specification)
 	}
 }
 
-void Encoder::SetOggSerialNumber(long serialNumber)
+void StreamEncoder::SetOggSerialNumber(long serialNumber)
 {
 	FLAC__ASSERT(this->IsValid);
 	if (FLAC__stream_encoder_set_ogg_serial_number(this->encoder, serialNumber) == 0)
@@ -508,12 +508,12 @@ void Encoder::SetOggSerialNumber(long serialNumber)
 	}
 }
 
-FLAC__StreamEncoderTellStatus Encoder::TellCallback(const FLAC__StreamEncoder* encoder, FLAC__uint64* absolute_byte_offset, void* client_data)
+FLAC__StreamEncoderTellStatus StreamEncoder::TellCallback(const FLAC__StreamEncoder* encoder, FLAC__uint64* absolute_byte_offset, void* client_data)
 {
 	return FLAC__StreamEncoderTellStatus::FLAC__STREAM_ENCODER_TELL_STATUS_OK;
 }
 
-FLAC__StreamEncoderWriteStatus Encoder::WriteCallback(const FLAC__StreamEncoder* encoder, const FLAC__byte buffer[], size_t bytes, unsigned samples, unsigned current_frame, void* client_data)
+FLAC__StreamEncoderWriteStatus StreamEncoder::WriteCallback(const FLAC__StreamEncoder* encoder, const FLAC__byte buffer[], size_t bytes, unsigned samples, unsigned current_frame, void* client_data)
 {
 	array<unsigned char>^ managedBuffer = gcnew array<unsigned char>(bytes);
 	for (unsigned int i = 0; i < bytes; i++)

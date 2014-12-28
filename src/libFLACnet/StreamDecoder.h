@@ -33,7 +33,7 @@ namespace FLAC
 	[System::Runtime::InteropServices::UnmanagedFunctionPointer(System::Runtime::InteropServices::CallingConvention::Cdecl)]
 	public delegate void StreamDecoderError(const FLAC__StreamDecoder* decoder, FLAC__StreamDecoderErrorStatus status, void* client_data);
 
-	public ref class Decoder
+	public ref class StreamDecoder
 	{
 		FLAC__StreamDecoder* decoder;
 
@@ -54,8 +54,9 @@ namespace FLAC
 		System::Runtime::InteropServices::GCHandle errorHandle;
 
 	public:
-		Decoder();
-		~Decoder();
+		StreamDecoder();
+
+		~StreamDecoder();
 
 		property unsigned int BitsPerSample
 		{

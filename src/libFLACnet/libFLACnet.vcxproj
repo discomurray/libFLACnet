@@ -139,10 +139,10 @@
   <ItemGroup>
     <ClInclude Include="ChannelAssignment.h" />
     <ClInclude Include="DecoderErrorStats.h" />
-    <ClInclude Include="Decoder.h" />
+    <ClInclude Include="StreamDecoder.h" />
     <ClInclude Include="DecoderStreamException.h" />
     <ClInclude Include="DecoderStreamState.h" />
-    <ClInclude Include="Encoder.h" />
+    <ClInclude Include="StreamEncoder.h" />
     <ClInclude Include="EncoderStreamException.h" />
     <ClInclude Include="EncoderStreamState.h" />
     <ClInclude Include="MetadataId.h" />
@@ -153,10 +153,10 @@
   <ItemGroup>
     <ClCompile Include="AssemblyInfo.cpp" />
     <ClCompile Include="DecoderErrorStats.cpp" />
-    <ClCompile Include="Decoder.cpp" />
+    <ClCompile Include="StreamDecoder.cpp" />
     <ClCompile Include="DecoderStreamException.cpp" />
     <ClCompile Include="DecoderStreamState.cpp" />
-    <ClCompile Include="Encoder.cpp" />
+    <ClCompile Include="StreamEncoder.cpp" />
     <ClCompile Include="EncoderStreamException.cpp" />
     <ClCompile Include="EncoderStreamState.cpp" />
     <ClCompile Include="Stdafx.cpp">

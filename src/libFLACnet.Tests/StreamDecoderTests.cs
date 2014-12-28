@@ -9,12 +9,12 @@
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
-    public class DecoderTests
+    public class StreamDecoderTests
     {
         [TestMethod]
         public void Constructor_IsValid()
         {
-            Decoder decoder = new Decoder();
+            StreamDecoder decoder = new StreamDecoder();
 
             Assert.IsTrue(decoder.IsValid);
         }
@@ -22,7 +22,7 @@
         [TestMethod]
         public void GetState_IsNotNull()
         {
-            Decoder decoder = new Decoder();
+            StreamDecoder decoder = new StreamDecoder();
 
             Assert.IsNotNull(decoder.GetState());
         }
@@ -32,14 +32,14 @@
         {
             MetadataType streamInfo = MetadataType.StreamInfo;
 
-            Decoder decoder = new Decoder();
+            StreamDecoder decoder = new StreamDecoder();
             decoder.SetMetadataIgnore(streamInfo);
         }
 
         [TestMethod]
         public void SetMetadataIgnoreAll()
         {
-            Decoder decoder = new Decoder();
+            StreamDecoder decoder = new StreamDecoder();
             decoder.SetMetadataIgnoreAll();
         }
 
@@ -48,14 +48,14 @@
         {
             MetadataId id = new MetadataId { byte1 = 0x00, byte2 = 0x00, byte3 = 0x00, byte4 = 0x00 };
 
-            Decoder decoder = new Decoder();
+            StreamDecoder decoder = new StreamDecoder();
             decoder.SetMetadataIgnoreApplication(id);
         }
 
         [TestMethod]
         public void SetMetadataRespond_StreamInfo()
         {
-            Decoder decoder = new Decoder();
+            StreamDecoder decoder = new StreamDecoder();
 
             MetadataType type = MetadataType.StreamInfo;
             decoder.SetMetadataRespond(type);
@@ -66,14 +66,14 @@
         {
             MetadataId id = new MetadataId { byte1 = 0x00, byte2 = 0x00, byte3 = 0x00, byte4 = 0x00 };
 
-            Decoder decoder = new Decoder();
+            StreamDecoder decoder = new StreamDecoder();
             decoder.SetMetadataRespondApplication(id);
         }
 
         [TestMethod]
         public void SetMetadataRespondAll()
         {
-            Decoder decoder = new Decoder();
+            StreamDecoder decoder = new StreamDecoder();
             decoder.SetMetadataRespondAll();
         }
 
@@ -82,7 +82,7 @@
         {
             ulong expectedSamples = 0;
 
-            Decoder decoder = new Decoder();
+            StreamDecoder decoder = new StreamDecoder();
             Assert.AreEqual(decoder.TotalSamples, expectedSamples);
         }
 
@@ -91,7 +91,7 @@
         {
             uint expectedChannels = 0;
 
-            Decoder decoder = new Decoder();
+            StreamDecoder decoder = new StreamDecoder();
             Assert.AreEqual(decoder.Channels, expectedChannels);
         }
 
@@ -100,7 +100,7 @@
         {
             ChannelAssignment assignment = FLAC.ChannelAssignment.Independent;
 
-            Decoder decoder = new Decoder();
+            StreamDecoder decoder = new StreamDecoder();
             Assert.AreEqual(decoder.ChannelAssignment, assignment);
         }
 
@@ -109,7 +109,7 @@
         {
             uint expectedBitsPerSample = 0;
 
-            Decoder decoder = new Decoder();
+            StreamDecoder decoder = new StreamDecoder();
 
             Assert.AreEqual(decoder.BitsPerSample, expectedBitsPerSample);
         }
@@ -119,7 +119,7 @@
         {
             uint expectedSampleRate = 0;
 
-            Decoder decoder = new Decoder();
+            StreamDecoder decoder = new StreamDecoder();
 
             Assert.AreEqual(decoder.SampleRate, expectedSampleRate);
         }
@@ -129,7 +129,7 @@
         {
             uint expectedBlockSize = 0;
 
-            Decoder decoder = new Decoder();
+            StreamDecoder decoder = new StreamDecoder();
 
             Assert.AreEqual(decoder.BlockSize, expectedBlockSize);
         }
@@ -139,7 +139,7 @@
         {
             ulong expectedPosition = 0;
 
-            Decoder decoder = new Decoder();
+            StreamDecoder decoder = new StreamDecoder();
 
             Assert.AreEqual(decoder.GetDecodePosition(), expectedPosition);
         }
