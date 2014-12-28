@@ -85,6 +85,19 @@ unsigned long long Decoder::TotalSamples::get()
 	return FLAC__stream_decoder_get_total_samples(this->decoder);
 }
 
+unsigned long long Decoder::GetDecodePosition()
+{
+	FLAC__ASSERT(this->IsValid);
+
+	FLAC__uint64 position;
+	if (FLAC__stream_decoder_get_decode_position(this->decoder, &position) == 0)
+	{
+		throw gcnew DecoderStreamException();
+	}
+
+	return position;
+}
+
 DecoderStreamState^ Decoder::GetState()
 {
 	FLAC__ASSERT(this->IsValid);

@@ -58,6 +58,8 @@ namespace FLAC
 			unsigned long long get();
 		}
 
+		unsigned long long GetDecodePosition();
+
 		DecoderStreamState^ GetState();
 
 		void SetMetadataIgnore(MetadataType type);

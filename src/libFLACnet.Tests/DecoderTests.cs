@@ -133,5 +133,15 @@
 
             Assert.AreEqual(decoder.BlockSize, expectedBlockSize);
         }
+
+        [TestMethod, ExpectedException(typeof(DecoderStreamException))]
+        public void GetDecodePosition_Unintialized()
+        {
+            ulong expectedPosition = 0;
+
+            Decoder decoder = new Decoder();
+
+            Assert.AreEqual(decoder.GetDecodePosition(), expectedPosition);
+        }
     }
 }
