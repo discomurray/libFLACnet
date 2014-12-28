@@ -85,5 +85,14 @@
             Decoder decoder = new Decoder();
             Assert.AreEqual(decoder.TotalSamples, expectedSamples);
         }
+
+        [TestMethod]
+        public void Channels()
+        {
+            uint expectedChannels = 0;
+
+            Decoder decoder = new Decoder();
+            Assert.AreEqual(decoder.Channels, expectedChannels);
+        }
     }
 }

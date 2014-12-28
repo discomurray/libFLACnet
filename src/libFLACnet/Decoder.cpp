@@ -21,6 +21,13 @@ Decoder::~Decoder()
 	}
 }
 
+unsigned int Decoder::Channels::get()
+{
+	FLAC__ASSERT(this->IsValid);
+
+	return FLAC__stream_decoder_get_channels(this->decoder);
+}
+
 bool Decoder::IsValid::get()
 {
 	return this->decoder != nullptr;

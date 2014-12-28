@@ -16,6 +16,11 @@ namespace FLAC
 		Decoder();
 		~Decoder();
 
+		property unsigned int Channels
+		{
+			unsigned int get();
+		}
+
 		property bool IsValid
 		{
 			bool get();
