@@ -76,5 +76,14 @@
             Decoder decoder = new Decoder();
             decoder.SetMetadataRespondAll();
         }
+
+        [TestMethod]
+        public void TotalSamples()
+        {
+            ulong expectedSamples = 0;
+
+            Decoder decoder = new Decoder();
+            Assert.AreEqual(decoder.TotalSamples, expectedSamples);
+        }
     }
 }

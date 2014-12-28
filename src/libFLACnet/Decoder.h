@@ -27,6 +27,11 @@ namespace FLAC
 			void set(bool value);
 		}
 
+		property unsigned long long TotalSamples
+		{
+			unsigned long long get();
+		}
+
 		DecoderStreamState^ GetState();
 
 		void SetMetadataIgnore(MetadataType type);
