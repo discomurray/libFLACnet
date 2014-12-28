@@ -9,14 +9,16 @@
 #include "EncoderStreamException.h"
 
 using namespace System;
+using namespace System::IO;
 using namespace System::Runtime::InteropServices;
 
 using namespace FLAC;
 
 using namespace msclr::interop;
 
-Encoder::Encoder()
-	: encoder(FLAC__stream_encoder_new())
+Encoder::Encoder(Stream^ stream)
+	: encoder(FLAC__stream_encoder_new()),
+	  stream(stream)
 {
 }
 

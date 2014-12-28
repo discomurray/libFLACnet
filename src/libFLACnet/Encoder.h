@@ -32,8 +32,10 @@ namespace FLAC
 
 		System::Runtime::InteropServices::GCHandle writeHandle;
 
+		System::IO::Stream^ stream;
+
 	public:
-		Encoder();
+		Encoder(System::IO::Stream^ stream);
 
 		~Encoder();
 
@@ -164,7 +166,7 @@ namespace FLAC
 		FLAC__StreamEncoderSeekStatus SeekCallback(const FLAC__StreamEncoder* encoder, FLAC__uint64 absolute_byte_offset, void* client_data);
 
 		FLAC__StreamEncoderTellStatus TellCallback(const FLAC__StreamEncoder* encoder, FLAC__uint64* absolute_byte_offset, void* client_data);
-				
+
 		FLAC__StreamEncoderWriteStatus WriteCallback(const FLAC__StreamEncoder* encoder, const FLAC__byte buffer[], size_t bytes, unsigned samples, unsigned current_frame, void* client_data);
 	};
 }
