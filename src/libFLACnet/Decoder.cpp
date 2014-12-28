@@ -21,6 +21,13 @@ Decoder::~Decoder()
 	}
 }
 
+ChannelAssignment Decoder::ChannelAssignment::get()
+{
+	FLAC__ASSERT(this->IsValid);
+
+	return static_cast<FLAC::ChannelAssignment>(FLAC__stream_decoder_get_channel_assignment(this->decoder));
+}
+
 unsigned int Decoder::Channels::get()
 {
 	FLAC__ASSERT(this->IsValid);

@@ -137,6 +137,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ChannelAssignment.h" />
     <ClInclude Include="DecoderErrorStats.h" />
     <ClInclude Include="Decoder.h" />
     <ClInclude Include="DecoderStreamException.h" />

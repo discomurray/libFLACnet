@@ -94,5 +94,14 @@
             Decoder decoder = new Decoder();
             Assert.AreEqual(decoder.Channels, expectedChannels);
         }
+
+        [TestMethod]
+        public void ChannelAssignment()
+        {
+            ChannelAssignment assignment = FLAC.ChannelAssignment.Independent;
+
+            Decoder decoder = new Decoder();
+            Assert.AreEqual(decoder.ChannelAssignment, assignment);
+        }
     }
 }

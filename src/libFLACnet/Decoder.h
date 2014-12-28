@@ -2,6 +2,7 @@
 
 #include <FLAC\stream_decoder.h>
 
+#include "ChannelAssignment.h"
 #include "DecoderStreamState.h"
 #include "MetadataId.h"
 #include "MetadataType.h"
@@ -15,6 +16,11 @@ namespace FLAC
 	public:
 		Decoder();
 		~Decoder();
+
+		property ChannelAssignment ChannelAssignment
+		{
+			FLAC::ChannelAssignment get();
+		}
 
 		property unsigned int Channels
 		{
