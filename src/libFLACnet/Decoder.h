@@ -9,9 +9,49 @@
 
 namespace FLAC
 {
+	[System::Runtime::InteropServices::UnmanagedFunctionPointer(System::Runtime::InteropServices::CallingConvention::Cdecl)]
+	public delegate FLAC__StreamDecoderReadStatus StreamDecoderRead(const FLAC__StreamDecoder* decoder, FLAC__byte buffer[], size_t* bytes, void* client_data);
+
+	[System::Runtime::InteropServices::UnmanagedFunctionPointer(System::Runtime::InteropServices::CallingConvention::Cdecl)]
+	public delegate FLAC__StreamDecoderSeekStatus StreamDecoderSeek(const FLAC__StreamDecoder* decoder, FLAC__uint64 absolute_byte_offset, void* client_data);
+
+	[System::Runtime::InteropServices::UnmanagedFunctionPointer(System::Runtime::InteropServices::CallingConvention::Cdecl)]
+	public delegate FLAC__StreamDecoderTellStatus StreamDecoderTell(const FLAC__StreamDecoder* decoder, FLAC__uint64* absolute_byte_offset, void* client_data);
+
+	[System::Runtime::InteropServices::UnmanagedFunctionPointer(System::Runtime::InteropServices::CallingConvention::Cdecl)]
+	public delegate FLAC__StreamDecoderLengthStatus StreamDecoderLength(const FLAC__StreamDecoder* decoder, FLAC__uint64* stream_length, void* client_data);
+
+	[System::Runtime::InteropServices::UnmanagedFunctionPointer(System::Runtime::InteropServices::CallingConvention::Cdecl)]
+	public delegate FLAC__bool StreamDecoderEof(const FLAC__StreamDecoder* decoder, void* client_data);
+
+	[System::Runtime::InteropServices::UnmanagedFunctionPointer(System::Runtime::InteropServices::CallingConvention::Cdecl)]
+	public delegate FLAC__StreamDecoderWriteStatus StreamDecoderWrite(const FLAC__StreamDecoder* decoder, const FLAC__Frame* frame, const FLAC__int32* const buffer[], void* client_data);
+
+	[System::Runtime::InteropServices::UnmanagedFunctionPointer(System::Runtime::InteropServices::CallingConvention::Cdecl)]
+	public delegate void StreamDecoderMetadata(const FLAC__StreamDecoder* decoder, const FLAC__StreamMetadata* metadata, void* client_data);
+
+	[System::Runtime::InteropServices::UnmanagedFunctionPointer(System::Runtime::InteropServices::CallingConvention::Cdecl)]
+	public delegate void StreamDecoderError(const FLAC__StreamDecoder* decoder, FLAC__StreamDecoderErrorStatus status, void* client_data);
+
 	public ref class Decoder
 	{
 		FLAC__StreamDecoder* decoder;
+
+		System::Runtime::InteropServices::GCHandle readHandle;
+
+		System::Runtime::InteropServices::GCHandle seekHandle;
+
+		System::Runtime::InteropServices::GCHandle tellHandle;
+
+		System::Runtime::InteropServices::GCHandle lengthHandle;
+
+		System::Runtime::InteropServices::GCHandle eofHandle;
+
+		System::Runtime::InteropServices::GCHandle writeHandle;
+
+		System::Runtime::InteropServices::GCHandle metadataHandle;
+
+		System::Runtime::InteropServices::GCHandle errorHandle;
 
 	public:
 		Decoder();
@@ -62,6 +102,8 @@ namespace FLAC
 
 		DecoderStreamState^ GetState();
 
+		void Initialize();
+
 		void SetMetadataIgnore(MetadataType type);
 
 		void SetMetadataIgnoreAll();
@@ -75,5 +117,15 @@ namespace FLAC
 		void SetMetadataRespondApplication(MetadataId^ id);
 
 		void SetOggSerialNumber(long serialNumber);
+
+	private:
+		FLAC__StreamDecoderReadStatus Read(const FLAC__StreamDecoder* decoder, FLAC__byte buffer[], size_t* bytes, void* client_data);
+		FLAC__StreamDecoderSeekStatus Seek(const FLAC__StreamDecoder* decoder, FLAC__uint64 absolute_byte_offset, void* client_data);
+		FLAC__StreamDecoderTellStatus Tell(const FLAC__StreamDecoder* decoder, FLAC__uint64* absolute_byte_offset, void* client_data);
+		FLAC__StreamDecoderLengthStatus Length(const FLAC__StreamDecoder* decoder, FLAC__uint64* stream_length, void* client_data);
+		FLAC__bool Eof(const FLAC__StreamDecoder* decoder, void* client_data);
+		FLAC__StreamDecoderWriteStatus Write(const FLAC__StreamDecoder* decoder, const FLAC__Frame* frame, const FLAC__int32* const buffer[], void* client_data);
+		void Metadata(const FLAC__StreamDecoder* decoder, const FLAC__StreamMetadata* metadata, void* client_data);
+		void Error(const FLAC__StreamDecoder* decoder, FLAC__StreamDecoderErrorStatus status, void* client_data);
 	};
 }
