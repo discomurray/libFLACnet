@@ -27,5 +27,14 @@
             MetadataType type = MetadataType.StreamInfo;
             decoder.SetMetadataRespond(type);
         }
+
+        [TestMethod]
+        public void SetMetadataRespondApplication_()
+        {
+            MetadataId id = new MetadataId { byte1 = 0x00, byte2 = 0x00, byte3 = 0x00, byte4 = 0x00 };
+
+            Decoder decoder = new Decoder();
+            decoder.SetMetadataRespondApplication(id);
+        }
     }
 }

@@ -2,6 +2,7 @@
 
 #include <FLAC\stream_decoder.h>
 
+#include "MetadataId.h"
 #include "MetadataType.h"
 
 namespace FLAC
@@ -26,6 +27,8 @@ namespace FLAC
 		}
 
 		void SetMetadataRespond(MetadataType type);
+
+		void SetMetadataRespondApplication(MetadataId^ id);
 
 		void SetOggSerialNumber(long serialNumber);
 	};
