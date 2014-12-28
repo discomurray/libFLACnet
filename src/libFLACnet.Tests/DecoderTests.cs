@@ -29,6 +29,15 @@
         }
 
         [TestMethod]
+        public void SetMetadataIgnoreApplication()
+        {
+            MetadataId id = new MetadataId { byte1 = 0x00, byte2 = 0x00, byte3 = 0x00, byte4 = 0x00 };
+
+            Decoder decoder = new Decoder();
+            decoder.SetMetadataIgnoreApplication(id);
+        }
+
+        [TestMethod]
         public void SetMetadataRespond_StreamInfo()
         {
             Decoder decoder = new Decoder();

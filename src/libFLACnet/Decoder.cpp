@@ -53,6 +53,18 @@ void Decoder::SetMetadataIgnore(MetadataType type)
 	}
 }
 
+void Decoder::SetMetadataIgnoreApplication(MetadataId^ id)
+{
+	FLAC__ASSERT(this->IsValid);
+
+	FLAC__byte flacId[4] = { id->byte1, id->byte2, id->byte3, id->byte4 };
+
+	if (FLAC__stream_decoder_set_metadata_ignore_application(this->decoder, flacId) == 0)
+	{
+		throw gcnew DecoderStreamException();
+	}
+}
+
 void Decoder::SetMetadataRespond(MetadataType type)
 {
 	FLAC__ASSERT(this->IsValid);
