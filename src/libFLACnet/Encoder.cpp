@@ -285,7 +285,7 @@ void Encoder::Verify::set(bool value)
 void Encoder::Finish()
 {
 	FLAC__ASSERT(this->IsValid);
-	if (FLAC__stream_encoder_finish(this->encoder) != 0)
+	if (FLAC__stream_encoder_finish(this->encoder) == 0)
 	{
 		throw gcnew EncoderStreamException();
 	}
@@ -358,7 +358,7 @@ void Encoder::Process(array<array<int>^>^ samples, unsigned int sampleCount)
 
 	try
 	{
-		if (FLAC__stream_encoder_process(this->encoder, channels, sampleCount) != 0)
+		if (FLAC__stream_encoder_process(this->encoder, channels, sampleCount) == 0)
 		{
 			throw gcnew EncoderStreamException();
 		}
@@ -384,7 +384,7 @@ void Encoder::ProcessInterleaved(array<int>^ samples, unsigned int sampleCount)
 		buffer[i] = samples[i];
 	}
 
-	if (FLAC__stream_encoder_process_interleaved(this->encoder, buffer.data(), sampleCount) != 0)
+	if (FLAC__stream_encoder_process_interleaved(this->encoder, buffer.data(), sampleCount) == 0)
 	{
 		throw gcnew EncoderStreamException();
 	}
