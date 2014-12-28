@@ -144,6 +144,7 @@
     <ClInclude Include="Encoder.h" />
     <ClInclude Include="EncoderStreamException.h" />
     <ClInclude Include="EncoderStreamState.h" />
+    <ClInclude Include="MetadataType.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Stdafx.h" />
   </ItemGroup>

@@ -2,6 +2,8 @@
 
 #include <FLAC\stream_decoder.h>
 
+#include "MetadataType.h"
+
 namespace FLAC
 {
 	public ref class Decoder
@@ -22,6 +24,8 @@ namespace FLAC
 			bool get();
 			void set(bool value);
 		}
+
+		void SetMetadataRespond(MetadataType type);
 
 		void SetOggSerialNumber(long serialNumber);
 	};
