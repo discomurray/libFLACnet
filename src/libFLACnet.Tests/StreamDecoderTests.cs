@@ -157,5 +157,26 @@
             StreamDecoder decoder = new StreamDecoder();
             decoder.InitializeOgg();
         }
+
+        [TestMethod]
+        public void Finish()
+        {
+            StreamDecoder decoder = new StreamDecoder();
+            decoder.Finish();
+        }
+
+        [TestMethod]
+        public void Flush()
+        {
+            StreamDecoder decoder = new StreamDecoder();
+            decoder.Flush();
+        }
+
+        [TestMethod]
+        public void Reset()
+        {
+            StreamDecoder decoder = new StreamDecoder();
+            decoder.Reset();
+        }
     }
 }

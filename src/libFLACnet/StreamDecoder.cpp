@@ -255,6 +255,24 @@ FLAC__StreamDecoderLengthStatus StreamDecoder::Length(const FLAC__StreamDecoder*
 	return FLAC__StreamDecoderLengthStatus::FLAC__STREAM_DECODER_LENGTH_STATUS_OK;
 }
 
+void StreamDecoder::Finish()
+{
+	FLAC__ASSERT(this->IsValid);
+	if (FLAC__stream_decoder_finish(this->decoder) == 0)
+	{
+		throw gcnew DecoderStreamException();
+	}
+}
+
+void StreamDecoder::Flush()
+{
+	FLAC__ASSERT(this->IsValid);
+	if (FLAC__stream_decoder_flush(this->decoder) == 0)
+	{
+		throw gcnew DecoderStreamException();
+	}
+}
+
 void StreamDecoder::Metadata(const FLAC__StreamDecoder* decoder, const FLAC__StreamMetadata* metadata, void* client_data)
 {
 }
@@ -262,6 +280,16 @@ void StreamDecoder::Metadata(const FLAC__StreamDecoder* decoder, const FLAC__Str
 FLAC__StreamDecoderReadStatus StreamDecoder::Read(const FLAC__StreamDecoder* decoder, FLAC__byte buffer[], size_t* bytes, void* client_data)
 {
 	return FLAC__StreamDecoderReadStatus::FLAC__STREAM_DECODER_READ_STATUS_CONTINUE;
+}
+
+void StreamDecoder::Reset()
+{
+	FLAC__ASSERT(this->IsValid);
+
+	if (FLAC__stream_decoder_reset(this->decoder) == 0)
+	{
+		throw gcnew DecoderStreamException();
+	}
 }
 
 FLAC__StreamDecoderSeekStatus StreamDecoder::Seek(const FLAC__StreamDecoder* decoder, FLAC__uint64 absolute_byte_offset, void* client_data)
