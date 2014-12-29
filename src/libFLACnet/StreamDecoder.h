@@ -37,6 +37,8 @@ namespace FLAC
 	{
 		FLAC__StreamDecoder* decoder;
 
+		System::IO::Stream^ stream;
+
 		System::Runtime::InteropServices::GCHandle readHandle;
 
 		System::Runtime::InteropServices::GCHandle seekHandle;
@@ -54,7 +56,7 @@ namespace FLAC
 		System::Runtime::InteropServices::GCHandle errorHandle;
 
 	public:
-		StreamDecoder();
+		StreamDecoder(System::IO::Stream^ stream);
 
 		~StreamDecoder();
 

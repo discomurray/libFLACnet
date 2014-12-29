@@ -6,12 +6,14 @@
 #include "DecoderStreamException.h"
 
 using namespace System;
+using namespace System::IO;
 using namespace System::Runtime::InteropServices;
 
 using namespace FLAC;
 
-StreamDecoder::StreamDecoder()
-	: decoder(FLAC__stream_decoder_new())
+StreamDecoder::StreamDecoder(Stream^ stream)
+	: decoder(FLAC__stream_decoder_new()),
+	  stream(stream)
 {
 }
 

@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.IO;
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
@@ -14,7 +15,7 @@
         [TestMethod]
         public void Constructor_IsValid()
         {
-            StreamDecoder decoder = new StreamDecoder();
+            StreamDecoder decoder = new StreamDecoder(new MemoryStream());
 
             Assert.IsTrue(decoder.IsValid);
         }
@@ -22,7 +23,7 @@
         [TestMethod]
         public void GetState_IsNotNull()
         {
-            StreamDecoder decoder = new StreamDecoder();
+            StreamDecoder decoder = new StreamDecoder(new MemoryStream());
 
             Assert.IsNotNull(decoder.GetState());
         }
@@ -32,14 +33,14 @@
         {
             MetadataType streamInfo = MetadataType.StreamInfo;
 
-            StreamDecoder decoder = new StreamDecoder();
+            StreamDecoder decoder = new StreamDecoder(new MemoryStream());
             decoder.SetMetadataIgnore(streamInfo);
         }
 
         [TestMethod]
         public void SetMetadataIgnoreAll()
         {
-            StreamDecoder decoder = new StreamDecoder();
+            StreamDecoder decoder = new StreamDecoder(new MemoryStream());
             decoder.SetMetadataIgnoreAll();
         }
 
@@ -48,14 +49,14 @@
         {
             MetadataId id = new MetadataId { byte1 = 0x00, byte2 = 0x00, byte3 = 0x00, byte4 = 0x00 };
 
-            StreamDecoder decoder = new StreamDecoder();
+            StreamDecoder decoder = new StreamDecoder(new MemoryStream());
             decoder.SetMetadataIgnoreApplication(id);
         }
 
         [TestMethod]
         public void SetMetadataRespond_StreamInfo()
         {
-            StreamDecoder decoder = new StreamDecoder();
+            StreamDecoder decoder = new StreamDecoder(new MemoryStream());
 
             MetadataType type = MetadataType.StreamInfo;
             decoder.SetMetadataRespond(type);
@@ -66,14 +67,14 @@
         {
             MetadataId id = new MetadataId { byte1 = 0x00, byte2 = 0x00, byte3 = 0x00, byte4 = 0x00 };
 
-            StreamDecoder decoder = new StreamDecoder();
+            StreamDecoder decoder = new StreamDecoder(new MemoryStream());
             decoder.SetMetadataRespondApplication(id);
         }
 
         [TestMethod]
         public void SetMetadataRespondAll()
         {
-            StreamDecoder decoder = new StreamDecoder();
+            StreamDecoder decoder = new StreamDecoder(new MemoryStream());
             decoder.SetMetadataRespondAll();
         }
 
@@ -82,7 +83,7 @@
         {
             ulong expectedSamples = 0;
 
-            StreamDecoder decoder = new StreamDecoder();
+            StreamDecoder decoder = new StreamDecoder(new MemoryStream());
             Assert.AreEqual(decoder.TotalSamples, expectedSamples);
         }
 
@@ -91,7 +92,7 @@
         {
             uint expectedChannels = 0;
 
-            StreamDecoder decoder = new StreamDecoder();
+            StreamDecoder decoder = new StreamDecoder(new MemoryStream());
             Assert.AreEqual(decoder.Channels, expectedChannels);
         }
 
@@ -100,7 +101,7 @@
         {
             ChannelAssignment assignment = FLAC.ChannelAssignment.Independent;
 
-            StreamDecoder decoder = new StreamDecoder();
+            StreamDecoder decoder = new StreamDecoder(new MemoryStream());
             Assert.AreEqual(decoder.ChannelAssignment, assignment);
         }
 
@@ -109,7 +110,7 @@
         {
             uint expectedBitsPerSample = 0;
 
-            StreamDecoder decoder = new StreamDecoder();
+            StreamDecoder decoder = new StreamDecoder(new MemoryStream());
 
             Assert.AreEqual(decoder.BitsPerSample, expectedBitsPerSample);
         }
@@ -119,7 +120,7 @@
         {
             uint expectedSampleRate = 0;
 
-            StreamDecoder decoder = new StreamDecoder();
+            StreamDecoder decoder = new StreamDecoder(new MemoryStream());
 
             Assert.AreEqual(decoder.SampleRate, expectedSampleRate);
         }
@@ -129,7 +130,7 @@
         {
             uint expectedBlockSize = 0;
 
-            StreamDecoder decoder = new StreamDecoder();
+            StreamDecoder decoder = new StreamDecoder(new MemoryStream());
 
             Assert.AreEqual(decoder.BlockSize, expectedBlockSize);
         }
@@ -139,7 +140,7 @@
         {
             ulong expectedPosition = 0;
 
-            StreamDecoder decoder = new StreamDecoder();
+            StreamDecoder decoder = new StreamDecoder(new MemoryStream());
 
             Assert.AreEqual(decoder.GetDecodePosition(), expectedPosition);
         }
@@ -147,35 +148,35 @@
         [TestMethod]
         public void Initialize()
         {
-            StreamDecoder decoder = new StreamDecoder();
+            StreamDecoder decoder = new StreamDecoder(new MemoryStream());
             decoder.Initialize();
         }
 
         [TestMethod]
         public void InitializeOgg()
         {
-            StreamDecoder decoder = new StreamDecoder();
+            StreamDecoder decoder = new StreamDecoder(new MemoryStream());
             decoder.InitializeOgg();
         }
 
         [TestMethod]
         public void Finish()
         {
-            StreamDecoder decoder = new StreamDecoder();
+            StreamDecoder decoder = new StreamDecoder(new MemoryStream());
             decoder.Finish();
         }
 
         [TestMethod]
         public void Flush()
         {
-            StreamDecoder decoder = new StreamDecoder();
+            StreamDecoder decoder = new StreamDecoder(new MemoryStream());
             decoder.Flush();
         }
 
         [TestMethod]
         public void Reset()
         {
-            StreamDecoder decoder = new StreamDecoder();
+            StreamDecoder decoder = new StreamDecoder(new MemoryStream());
             decoder.Reset();
         }
     }
