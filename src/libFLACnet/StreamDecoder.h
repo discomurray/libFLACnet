@@ -111,6 +111,12 @@ namespace FLAC
 
 		void Flush();
 
+		void ProcessSingle();
+
+		void ProcessUntilEndOfMetadata();
+
+		void ProcessUntilEndOfStream();
+
 		void Reset();
 
 		void SetMetadataIgnore(MetadataType type);

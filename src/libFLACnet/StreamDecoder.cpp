@@ -277,6 +277,36 @@ void StreamDecoder::Metadata(const FLAC__StreamDecoder* decoder, const FLAC__Str
 {
 }
 
+void StreamDecoder::ProcessSingle()
+{
+	FLAC__ASSERT(this->IsValid);
+
+	if (FLAC__stream_decoder_process_single(this->decoder) == 0)
+	{
+		throw gcnew DecoderStreamException();
+	}
+}
+
+void StreamDecoder::ProcessUntilEndOfMetadata()
+{
+	FLAC__ASSERT(this->IsValid);
+
+	if (FLAC__stream_decoder_process_until_end_of_metadata(this->decoder) == 0)
+	{
+		throw gcnew DecoderStreamException();
+	}
+}
+
+void StreamDecoder::ProcessUntilEndOfStream()
+{
+	FLAC__ASSERT(this->IsValid);
+
+	if (FLAC__stream_decoder_process_until_end_of_stream(this->decoder) == 0)
+	{
+		throw gcnew DecoderStreamException();
+	}
+}
+
 FLAC__StreamDecoderReadStatus StreamDecoder::Read(const FLAC__StreamDecoder* decoder, FLAC__byte buffer[], size_t* bytes, void* client_data)
 {
 	return FLAC__StreamDecoderReadStatus::FLAC__STREAM_DECODER_READ_STATUS_CONTINUE;
