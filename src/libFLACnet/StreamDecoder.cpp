@@ -311,6 +311,32 @@ void StreamDecoder::ProcessUntilEndOfStream()
 
 FLAC__StreamDecoderReadStatus StreamDecoder::Read(const FLAC__StreamDecoder* decoder, FLAC__byte buffer[], size_t* bytes, void* client_data)
 {
+	if (!this->stream->CanRead)
+	{
+		return FLAC__StreamDecoderReadStatus::FLAC__STREAM_DECODER_READ_STATUS_ABORT;
+	}
+
+	array<unsigned char>^ managedBuffer = gcnew array<unsigned char>(*bytes);
+	try
+	{
+		int read = this->stream->Read(managedBuffer, 0, *bytes);
+		if (read == 0)
+		{
+			return FLAC__StreamDecoderReadStatus::FLAC__STREAM_DECODER_READ_STATUS_END_OF_STREAM;
+		}
+
+		*bytes = read;
+
+		for (int i = 0; i < read; i++)
+		{
+			buffer[i] = managedBuffer[i];
+		}
+	}
+	catch (Exception^)
+	{
+		return FLAC__StreamDecoderReadStatus::FLAC__STREAM_DECODER_READ_STATUS_ABORT;
+	}
+
 	return FLAC__StreamDecoderReadStatus::FLAC__STREAM_DECODER_READ_STATUS_CONTINUE;
 }
 
@@ -326,7 +352,22 @@ void StreamDecoder::Reset()
 
 FLAC__StreamDecoderSeekStatus StreamDecoder::Seek(const FLAC__StreamDecoder* decoder, FLAC__uint64 absolute_byte_offset, void* client_data)
 {
-	return FLAC__StreamDecoderSeekStatus::FLAC__STREAM_DECODER_SEEK_STATUS_OK;
+	if (!this->stream->CanSeek)
+	{
+		return FLAC__StreamDecoderSeekStatus::FLAC__STREAM_DECODER_SEEK_STATUS_UNSUPPORTED;
+	}
+
+	try
+	{
+		this->stream->Seek(absolute_byte_offset, SeekOrigin::Begin);
+
+		return FLAC__StreamDecoderSeekStatus::FLAC__STREAM_DECODER_SEEK_STATUS_OK;
+	}
+	catch (Exception^)
+	{
+		return FLAC__StreamDecoderSeekStatus::FLAC__STREAM_DECODER_SEEK_STATUS_OK;
+	}
+
 }
 
 void StreamDecoder::SeekAbsolute(unsigned long long sample)
