@@ -424,7 +424,15 @@ void StreamDecoder::SkipSingleFrame()
 
 FLAC__StreamDecoderTellStatus StreamDecoder::Tell(const FLAC__StreamDecoder* decoder, FLAC__uint64* absolute_byte_offset, void* client_data)
 {
-	return FLAC__StreamDecoderTellStatus::FLAC__STREAM_DECODER_TELL_STATUS_OK;
+	try
+	{
+		*absolute_byte_offset = this->stream->Position;
+		return FLAC__StreamDecoderTellStatus::FLAC__STREAM_DECODER_TELL_STATUS_OK;
+	}
+	catch (Exception^)
+	{
+		return FLAC__StreamDecoderTellStatus::FLAC__STREAM_DECODER_TELL_STATUS_ERROR;
+	}
 }
 
 FLAC__StreamDecoderWriteStatus StreamDecoder::Write(const FLAC__StreamDecoder* decoder, const FLAC__Frame* frame, const FLAC__int32* const buffer[], void* client_data)

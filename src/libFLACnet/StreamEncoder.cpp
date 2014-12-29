@@ -510,7 +510,16 @@ void StreamEncoder::SetOggSerialNumber(long serialNumber)
 
 FLAC__StreamEncoderTellStatus StreamEncoder::TellCallback(const FLAC__StreamEncoder* encoder, FLAC__uint64* absolute_byte_offset, void* client_data)
 {
-	return FLAC__StreamEncoderTellStatus::FLAC__STREAM_ENCODER_TELL_STATUS_OK;
+	try
+	{
+		*absolute_byte_offset = this->stream->Position;
+
+		return FLAC__StreamEncoderTellStatus::FLAC__STREAM_ENCODER_TELL_STATUS_OK;
+	}
+	catch (Exception^)
+	{
+		return FLAC__StreamEncoderTellStatus::FLAC__STREAM_ENCODER_TELL_STATUS_ERROR;
+	}
 }
 
 FLAC__StreamEncoderWriteStatus StreamEncoder::WriteCallback(const FLAC__StreamEncoder* encoder, const FLAC__byte buffer[], size_t bytes, unsigned samples, unsigned current_frame, void* client_data)
