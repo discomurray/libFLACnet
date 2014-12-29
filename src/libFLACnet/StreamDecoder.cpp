@@ -327,6 +327,16 @@ FLAC__StreamDecoderSeekStatus StreamDecoder::Seek(const FLAC__StreamDecoder* dec
 	return FLAC__StreamDecoderSeekStatus::FLAC__STREAM_DECODER_SEEK_STATUS_OK;
 }
 
+void StreamDecoder::SeekAbsolute(unsigned long long sample)
+{
+	FLAC__ASSERT(this->IsValid);
+
+	if (FLAC__stream_decoder_seek_absolute(this->decoder, sample) == 0)
+	{
+		throw gcnew DecoderStreamException();
+	}
+}
+
 void StreamDecoder::SetMetadataIgnore(MetadataType type)
 {
 	FLAC__ASSERT(this->IsValid);
@@ -395,6 +405,16 @@ void StreamDecoder::SetOggSerialNumber(long serialNumber)
 {
 	FLAC__ASSERT(this->IsValid);
 	if (FLAC__stream_decoder_set_ogg_serial_number(this->decoder, serialNumber) == 0)
+	{
+		throw gcnew DecoderStreamException();
+	}
+}
+
+void StreamDecoder::SkipSingleFrame()
+{
+	FLAC__ASSERT(this->IsValid);
+
+	if (FLAC__stream_decoder_skip_single_frame(this->decoder))
 	{
 		throw gcnew DecoderStreamException();
 	}

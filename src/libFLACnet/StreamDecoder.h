@@ -119,6 +119,8 @@ namespace FLAC
 
 		void Reset();
 
+		void SeekAbsolute(unsigned long long sample);
+
 		void SetMetadataIgnore(MetadataType type);
 
 		void SetMetadataIgnoreAll();
@@ -132,6 +134,8 @@ namespace FLAC
 		void SetMetadataRespondApplication(MetadataId^ id);
 
 		void SetOggSerialNumber(long serialNumber);
+
+		void SkipSingleFrame();
 
 	private:
 		FLAC__StreamDecoderReadStatus Read(const FLAC__StreamDecoder* decoder, FLAC__byte buffer[], size_t* bytes, void* client_data);
