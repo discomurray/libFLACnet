@@ -8,6 +8,17 @@
 *.exe
 .deps
 .libs
+*.obj
+*.log
+*.tlog
+*.idb
+*.pdb
+*.opensdf
+*.sdf
+*.suo
+*.ipch
+*.pch
+*.user
 Makefile
 Makefile.in
 aclocal.m4
@@ -44,6 +55,7 @@ man/manpage.refs
 missing
 objs/debug
 objs/release
+objs/x64/
 src/flac/flac
 src/libFLAC++/flac++.pc
 src/libFLAC/flac.pc

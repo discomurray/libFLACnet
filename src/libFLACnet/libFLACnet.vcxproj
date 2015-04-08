@@ -139,17 +139,45 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Application.h" />
+    <ClInclude Include="CueSheet.h" />
+    <ClInclude Include="CustomMetadata.h" />
+    <ClInclude Include="MetadataType.h" />
+    <ClInclude Include="Ogg.h" />
+    <ClInclude Include="Padding.h" />
+    <ClInclude Include="Picture.h" />
+    <ClInclude Include="PictureType.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="SeekPoint.h" />
+    <ClInclude Include="SeekTable.h" />
     <ClInclude Include="Stdafx.h" />
+    <ClInclude Include="StreamInfo.h" />
+    <ClInclude Include="StreamMetadata.h" />
+    <ClInclude Include="Track.h" />
+    <ClInclude Include="TrackIndex.h" />
+    <ClInclude Include="VorbisComment.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Application.cpp" />
     <ClCompile Include="AssemblyInfo.cpp" />
+    <ClCompile Include="CueSheet.cpp" />
+    <ClCompile Include="CustomMetadata.cpp" />
+    <ClCompile Include="Ogg.cpp" />
+    <ClCompile Include="Padding.cpp" />
+    <ClCompile Include="Picture.cpp" />
+    <ClCompile Include="SeekPoint.cpp" />
+    <ClCompile Include="SeekTable.cpp" />
     <ClCompile Include="Stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="StreamInfo.cpp" />
+    <ClCompile Include="StreamMetadata.cpp" />
+    <ClCompile Include="Track.cpp" />
+    <ClCompile Include="TrackIndex.cpp" />
+    <ClCompile Include="VorbisComment.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="app.rc" />
