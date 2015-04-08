@@ -31,6 +31,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libFLAC++_dynamic", "src\li
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libFLAC++_static", "src\libFLAC++\libFLAC++_static.vcxproj", "{4CEFBC86-C215-11DB-8314-0800200C9A66}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libFLACnet", "src\libFLACnet\libFLACnet.vcxproj", "{8F763D9E-9780-4EE5-8F2E-56947D12CCBA}"
+EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "metaflac", "src\metaflac\metaflac.vcxproj", "{4CEFBC87-C215-11DB-8314-0800200C9A66}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "plugin_common_static", "src\plugin_common\plugin_common_static.vcxproj", "{4CEFBC88-C215-11DB-8314-0800200C9A66}"
@@ -44,6 +46,8 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "test_libFLAC", "src\test_libFLAC\test_libFLAC.vcxproj", "{4CEFBC8C-C215-11DB-8314-0800200C9A66}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "test_libFLAC++", "src\test_libFLAC++\test_libFLAC++.vcxproj", "{4CEFBC8D-C215-11DB-8314-0800200C9A66}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "test_libFLACnet", "src\test_libFLACnet\test_libFLACnet.csproj", "{29EA6374-E933-4F71-86A4-4686D2AAB699}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "test_libs_common_static", "src\test_libs_common\test_libs_common_static.vcxproj", "{4CEFBC8E-C215-11DB-8314-0800200C9A66}"
 EndProject
@@ -177,6 +181,14 @@ Global
 		{4CEFBC86-C215-11DB-8314-0800200C9A66}.Release|Win32.Build.0 = Release|Win32
 		{4CEFBC86-C215-11DB-8314-0800200C9A66}.Release|x64.ActiveCfg = Release|x64
 		{4CEFBC86-C215-11DB-8314-0800200C9A66}.Release|x64.Build.0 = Release|x64
+		{8F763D9E-9780-4EE5-8F2E-56947D12CCBA}.Debug|Win32.ActiveCfg = Debug|Win32
+		{8F763D9E-9780-4EE5-8F2E-56947D12CCBA}.Debug|Win32.Build.0 = Debug|Win32
+		{8F763D9E-9780-4EE5-8F2E-56947D12CCBA}.Debug|x64.ActiveCfg = Debug|x64
+		{8F763D9E-9780-4EE5-8F2E-56947D12CCBA}.Debug|x64.Build.0 = Debug|x64
+		{8F763D9E-9780-4EE5-8F2E-56947D12CCBA}.Release|Win32.ActiveCfg = Release|Win32
+		{8F763D9E-9780-4EE5-8F2E-56947D12CCBA}.Release|Win32.Build.0 = Release|Win32
+		{8F763D9E-9780-4EE5-8F2E-56947D12CCBA}.Release|x64.ActiveCfg = Release|x64
+		{8F763D9E-9780-4EE5-8F2E-56947D12CCBA}.Release|x64.Build.0 = Release|x64
 		{4CEFBC87-C215-11DB-8314-0800200C9A66}.Debug|Win32.ActiveCfg = Debug|Win32
 		{4CEFBC87-C215-11DB-8314-0800200C9A66}.Debug|Win32.Build.0 = Debug|Win32
 		{4CEFBC87-C215-11DB-8314-0800200C9A66}.Debug|x64.ActiveCfg = Debug|x64
@@ -233,6 +245,14 @@ Global
 		{4CEFBC8D-C215-11DB-8314-0800200C9A66}.Release|Win32.Build.0 = Release|Win32
 		{4CEFBC8D-C215-11DB-8314-0800200C9A66}.Release|x64.ActiveCfg = Release|x64
 		{4CEFBC8D-C215-11DB-8314-0800200C9A66}.Release|x64.Build.0 = Release|x64
+		{29EA6374-E933-4F71-86A4-4686D2AAB699}.Debug|Win32.ActiveCfg = Debug|x86
+		{29EA6374-E933-4F71-86A4-4686D2AAB699}.Debug|Win32.Build.0 = Debug|x86
+		{29EA6374-E933-4F71-86A4-4686D2AAB699}.Debug|x64.ActiveCfg = Debug|x64
+		{29EA6374-E933-4F71-86A4-4686D2AAB699}.Debug|x64.Build.0 = Debug|x64
+		{29EA6374-E933-4F71-86A4-4686D2AAB699}.Release|Win32.ActiveCfg = Release|x86
+		{29EA6374-E933-4F71-86A4-4686D2AAB699}.Release|Win32.Build.0 = Release|x86
+		{29EA6374-E933-4F71-86A4-4686D2AAB699}.Release|x64.ActiveCfg = Release|x64
+		{29EA6374-E933-4F71-86A4-4686D2AAB699}.Release|x64.Build.0 = Release|x64
 		{4CEFBC8E-C215-11DB-8314-0800200C9A66}.Debug|Win32.ActiveCfg = Debug|Win32
 		{4CEFBC8E-C215-11DB-8314-0800200C9A66}.Debug|Win32.Build.0 = Debug|Win32
 		{4CEFBC8E-C215-11DB-8314-0800200C9A66}.Debug|x64.ActiveCfg = Debug|x64
